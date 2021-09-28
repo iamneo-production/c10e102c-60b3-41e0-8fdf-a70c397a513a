@@ -11,12 +11,19 @@ public class LoginController
     @Autowired
     private UserDao dao;
     @PostMapping("/login")
-    public String checkUser(@RequestBody List<LoginModel> login)
+    public boolean checkUser(@RequestBody List<LoginModel> login)
     {
-        UserModel user = dao.findById(login.get(0).getEmail()).get();
-        if(user.getPassword().equals(login.get(0).getPassword()))
-            return "Success";
-        
-        return "Failure";
+        try
+        {
+            UserModel user = dao.findById(login.get(0).getEmail()).get();
+            if(user.getPassword().equals(login.get(0).getPassword()))
+                return true;
+            return false;
+        }
+
+        catch(Exception e)
+        {
+            return false;
+        }
     }
 }
