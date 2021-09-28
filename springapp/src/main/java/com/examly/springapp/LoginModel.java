@@ -1,5 +1,7 @@
 package com.examly.springapp;
 
+import javax.persistence.*;
+
 public class LoginModel {
     
     // Class Members

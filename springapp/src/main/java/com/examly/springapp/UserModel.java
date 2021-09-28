@@ -1,17 +1,23 @@
 package com.examly.springapp;
 
 import java.util.*;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "user")
 public class UserModel {
     
     // Class Members 
+    @Id
     private String email;
-    private String password;
     private String username;
-    private String mobileNumber;
+    private String password;
+    private String mobile_num;
     private Boolean active;
     private String role;
+    @Transient
     private CartModel cart;
+    @Transient
     private List<OrderModel> ordersList;
 
     // No Args Constructor
@@ -19,12 +25,12 @@ public class UserModel {
     }
 
     // All Args Constructor
-    public UserModel(String email, String password, String username, String mobileNumber, Boolean active, String role, CartModel cart, List<OrderModel> ordersList) {
+    public UserModel(String email, String password, String username, String mobile_num, Boolean active, String role, CartModel cart, List<OrderModel> ordersList) {
         super();
         this.email = email;
-        this.password = password;
         this.username = username;
-        this.mobileNumber = mobileNumber;
+        this.password = password;
+        this.mobile_num = mobile_num;
         this.active = active;
         this.role = role;
         this.cart = cart;
@@ -50,11 +56,11 @@ public class UserModel {
     public String getUsername() {
         return username;
     }
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
+    public void setmobile_num(String mobile_num) {
+        this.mobile_num = mobile_num;
     }
-    public String getMobileNumber() {
-        return mobileNumber;
+    public String getmobile_num() {
+        return mobile_num;
     }
     public void setActive(Boolean active) {
         this.active = active;
