@@ -2,10 +2,38 @@
 import React, {Component} from 'react';
 import './Login.css';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 var pass = true;
 
 class Login extends Component{
+
+    state = {
+        email: "",
+        password: "",
+    }
+
+    emailChange = (e) => {
+        this.setState({email: e.target.value});
+    }
+
+    passwordChange = (e) => {
+        this.setState({password: e.target.value});
+    }
+
+    formSubmit = (e) => {
+        e.preventDefault();
+        var passHash = require('password-hash');
+        var hashedPass = passHash.generate(this.state.password);
+        const data = {
+            "email": this.state.email, 
+            "password": this.state.password
+        }
+        console.log(hashedPass);
+        axios.post(`https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/login`, data).then((res) => {
+            console.log(res);
+        })
+    }
 
     showPassword(e){
         if(pass){
@@ -23,44 +51,44 @@ class Login extends Component{
     
     render(){
         return(
-            <div class="has-navbar-fixed-top">
-            <nav class="navbar is-warning is-fixed-top is-small" role="navigation" aria-label="main navigation">
-                <div class="navbar-brand">
-                    <p class="navbar-item h1" href="
+            <div className="has-navbar-fixed-top">
+            <nav className="navbar is-warning is-fixed-top is-small" role="navigation" aria-label="main navigation">
+                <div className="navbar-brand">
+                    <p className="navbar-item h1" href="
                     https://bulma.io" id="dressHomeButton">
                     Fantasy Dress
                     </p>
                 </div>
             </nav>
-            <form class="content-container">
-                <div class="form" id="loginBox">
-                    <h1 class="title text is-warning">Login</h1>
-                    <div class="field">
-                        <p class="control has-icons-left ">
-                            <input required class="input" type="email" placeholder="Email" id="email" />
-                            <span class="icon is-small is-left" >
-                                <i class="fas fa-envelope"></i>
+            <form className="content-container" onSubmit={this.formSubmit}>
+                <div className="form" id="loginBox">
+                    <h1 className="title text is-warning">Login</h1>
+                    <div className="field">
+                        <p className="control has-icons-left ">
+                            <input required className="input" type="email" placeholder="Email" id="email" onChange={this.emailChange}/>
+                            <span className="icon is-small is-left" >
+                                <i className="fas fa-envelope"></i>
                             </span>
                         </p>
                     </div>
-                    <div class="field">
-                        <p class="control has-icons-left has-icons-right">
-                            <input required class="input" type="password" placeholder="Password" id="password" />
-                            <span class="icon is-small is-left">
-                            <i class="fas fa-lock"></i>
+                    <div className="field">
+                        <p className="control has-icons-left has-icons-right">
+                            <input required className="input" type="password" placeholder="Password" id="password" onChange={this.passwordChange}/>
+                            <span className="icon is-small is-left">
+                            <i className="fas fa-lock"></i>
                             </span>
-                            <span class="eye" >
-                                <i class="fas fa-eye" onClick={this.showPassword}></i>
+                            <span className="eye" >
+                                <i className="fas fa-eye" onClick={this.showPassword}></i>
                             </span>
                         </p>
                         </div>
-                        <div class="field">
-                        <p class="control down">
-                            <button class="button is-warning" id="submitButton">
+                        <div className="field">
+                        <p className="control down">
+                            <button className="button is-warning" id="submitButton">
                             Login
                             </button>
                         </p>
-                        <p class="control down">New User? <Link to="/signup" id="signupLink">click here</Link></p>
+                        <p className="control down">New User? <Link to="/signup" id="signupLink">click here</Link></p>
                     </div>
                 </div>
             </form>

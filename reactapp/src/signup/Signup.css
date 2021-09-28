@@ -50,6 +50,14 @@
     color: lightgrey;
 }
 
+.warning {
+    font-size: 12px;
+    text-align: left;
+    margin-top: 3px;
+    color: red;
+    display: none;
+}
+
 
 .down {
     margin-top: 15px; 

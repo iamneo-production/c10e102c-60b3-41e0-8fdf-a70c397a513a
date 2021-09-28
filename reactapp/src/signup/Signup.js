@@ -1,10 +1,66 @@
 import {Link} from 'react-router-dom';
 import './Signup.css';
 import {Component} from 'react';
+import axios from 'axios';
 
 var state = true;
+// axios.interceptors.request.use(
+//     config => {
+//         config.headers.Allow-Control-Allow-Origin = "*"
+//     }
+// )
 
 class SignUp extends Component{
+
+    state = {
+        email: "",
+        username: "",
+        mobilenumber: "",
+        password: "",
+        confirmpassword: ""
+    }
+
+    emailOnChange = (e) => {
+        this.setState({email: e.target.value});
+    }
+
+    usernameChange = (e) => {
+        this.setState({username: e.target.value});
+    }
+
+    mobilenumberChange = (e) => {
+        this.setState({mobilenumber: e.target.value});
+    }
+
+    passwordChange = (e) => {
+        this.setState({password: e.target.value});
+    }
+
+    confirmpasswordChange = (e) => {
+        this.setState({confirmpassword: e.target.value});
+    }
+
+    formClick = (e) => {
+        e.preventDefault();
+        if(this.state["password"] !== this.state["confirmpassword"]){
+            document.querySelector(".warning").style.display = "block";
+        }else{
+            document.querySelector(".warning").style.display = "none"; 
+            // var passHash = require('password-hash');
+            // var hashedPass = passHash.generate(this.state.password);
+            const data = {
+                "email": this.state.email,
+                "username": this.state.username,
+                "mobile_num": this.state.mobilenumber,
+                "password": this.state.password,
+                "role": "user"
+            }
+            console.log(data);
+            axios.post(`https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/signup`, data).then((res) => {
+                console.log(res.data);
+            })
+        }
+    }
 
     showPassword(e){
         if(state){
@@ -36,70 +92,71 @@ class SignUp extends Component{
 
     render() {
         return(
-            <div class="has-navbar-fixed-top">
-            <nav class="navbar is-warning is-fixed-top is-small" role="navigation" aria-label="main navigation">
-                <div class="navbar-brand">
-                    <p class="navbar-item h1" href="https://bulma.io" id="dressHomeButton">
+            <div className="has-navbar-fixed-top">
+            <nav className="navbar is-warning is-fixed-top is-small" role="navigation" aria-label="main navigation">
+                <div className="navbar-brand">
+                    <p className="navbar-item h1" id="dressHomeButton">
                     Fantasy Dress
                     </p>
                 </div>
             </nav>
-            <form class="content-container">
-                <div class="signup-form" id="signupBox">
-                    <h1 class="title text is-warning">Sign Up</h1>
-                    <div class="field">
-                        <p class="control has-icons-left ">
-                            <input required class="input" type="email" placeholder="Enter Email" id="email" />
-                            <span class="icon is-small is-left" >
-                                <i class="fas fa-envelope"></i>
+            <form className="content-container" onSubmit={this.formClick}>
+                <div className="signup-form" id="signupBox">
+                    <h1 className="title text is-warning">Sign Up</h1>
+                    <div className="field">
+                        <p className="control has-icons-left ">
+                            <input required className="input" type="email" placeholder="Enter Email" id="email"  onChange={this.emailOnChange} />
+                            <span className="icon is-small is-left" >
+                                <i className="fas fa-envelope"></i>
                             </span>
                         </p>
                     </div>
-                    <div class="field">
-                        <p class="control has-icons-left ">
-                            <input required class="input" type="text" placeholder="Enter Username" id="username" />
-                            <span class="icon is-small is-left" >
-                                <i class="fas fa-user"></i>
+                    <div className="field">
+                        <p className="control has-icons-left ">
+                            <input required className="input" type="text" placeholder="Enter Username" id="username" onChange={this.usernameChange}/>
+                            <span className="icon is-small is-left" >
+                                <i className="fas fa-user"></i>
                             </span>
                         </p>
                     </div>
-                    <div class="field">
-                        <p class="control has-icons-left ">
-                            <input required class="input" type="tel" placeholder="Enter Mobile Number" id="mobilenumber" />
-                            <span class="icon is-small is-left" >
-                                <i class="fas fa-phone-alt"></i>
+                    <div className="field">
+                        <p className="control has-icons-left ">
+                            <input required className="input" type="tel" placeholder="Enter Mobile Number" id="mobilenumber" pattern="[0-9]{10}" onChange={this.mobilenumberChange}/>
+                            <span className="icon is-small is-left" >
+                                <i className="fas fa-phone-alt"></i>
                             </span>
                         </p>
                     </div>
-                    <div class="field">
-                        <p class="control has-icons-left has-icons-right">
-                            <input required class="input" type="password" placeholder="Enter Password" id="password" />
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-lock"></i>
+                    <div className="field">
+                        <p className="control has-icons-left has-icons-right">
+                            <input required className="input" type="password" placeholder="Enter Password" id="password" onChange={this.passwordChange}/>
+                            <span className="icon is-small is-left">
+                                <i className="fas fa-lock"></i>
                             </span>
-                            <span class="eye">
-                                <i class="fas fa-eye" onClick={this.showPassword}></i>
-                            </span>
-                        </p>
-                    </div>
-                    <div class="field">
-                        <p class="control has-icons-left  has-icons-right">
-                            <input required class="input" type="password" placeholder="Confirm Password" id="confirmpassword" />
-                            <span class="icon is-small is-left">
-                            <i class="fas fa-lock"></i>
-                            </span>
-                            <span class="eye" >
-                                <i class="fas fa-eye" onClick={this.showConfirmPassword}></i>
+                            <span className="eye">
+                                <i className="fas fa-eye" onClick={this.showPassword}></i>
                             </span>
                         </p>
                     </div>
-                    <div class="field">
-                        <p class="control down">
-                            <button class="button is-warning" id="submitButton">
+                    <div className="field">
+                        <p className="control has-icons-left  has-icons-right">
+                            <input required className="input" type="password" placeholder="Confirm Password" id="confirmpassword" onChange={this.confirmpasswordChange}/>
+                            <span className="icon is-small is-left">
+                            <i className="fas fa-lock"></i>
+                            </span>
+                            <span className="eye" >
+                                <i className="fas fa-eye" onClick={this.showConfirmPassword}></i>
+                            </span>
+                        </p>
+                        <p className="warning">Password do not match<sup>*</sup></p>
+                    </div>
+                    <div className="field">
+                        <p className="control down">
+                            <button className="button is-warning" id="submitButton">
                             Sign Up
                             </button>
                         </p>
-                        <p class="control down">Already a member? <Link to="/login" id="signinLink">click here</Link></p>
+                        <p className="control down">Already a member? <Link to="/login" id="signinLink">click here</Link></p>
                     </div>
                 </div>
             </form>
