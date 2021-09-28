@@ -16,7 +16,11 @@ public class SignupController {
     public String saveUser(@RequestBody UserModel user)
     {
         // for(int i = 0; i < user.size(); i ++)
-            dao.save(user);
+        try{
+            UserModel new_user = dao.findById(user.getEmail()).get();
+            return "Already exists";
+        }catch(Exception e){}
+        dao.save(user);
         return "Saved Successfully";
     }
 
