@@ -1,17 +1,23 @@
 package com.examly.springapp;
 
 import java.util.*;
+import javax.persistence.*;
 
+@Entity
+@Table(name="user")
 public class UserModel {
     
     // Class Members 
+    @Id
     private String email;
     private String password;
     private String username;
     private String mobileNumber;
     private Boolean active;
     private String role;
+    @Transient
     private CartModel cart;
+    @Transient
     private List<OrderModel> ordersList;
 
     // No Args Constructor

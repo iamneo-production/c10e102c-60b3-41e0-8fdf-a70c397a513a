@@ -1,10 +1,15 @@
 package com.examly.springapp;
 
 import java.io.ObjectInputFilter.Status;
+import java.util.*;
+import javax.persistence.*;
 
+@Entity
+@Table(name="orders")
 public class OrderModel {
     
     // Class Variables
+    @Id
     private String orderId;
     private String userId;
     private String ProductName;

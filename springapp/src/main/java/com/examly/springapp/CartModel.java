@@ -1,9 +1,16 @@
 package com.examly.springapp;
 
+import java.util.*;
+import javax.persistence.*;
+
+@Entity
+@Table(name="cart")
 public class CartModel {
     
     // Class Variables
+    @Id
     private String cartItemId;
+    @Transient
     private UserModel userId;
     private String ProductName;
     private int Quantity;

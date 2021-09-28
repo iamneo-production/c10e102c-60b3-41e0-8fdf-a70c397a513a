@@ -1,10 +1,16 @@
 package com.examly.springapp;
 
+import java.util.*;
+import javax.persistence.*;
+
+@Entity
+@Table(name="product")
 public class ProductModel {
     
     // Class Members
     private String productId;
     private String imageUrl;
+    @Id
     private String productName;
     private String price;
     private String description;
