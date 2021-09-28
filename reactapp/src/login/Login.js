@@ -32,12 +32,12 @@ class Login extends Component{
                     </p>
                 </div>
             </nav>
-            <div class="content-container">
+            <form class="content-container">
                 <div class="form" id="loginBox">
                     <h1 class="title text is-warning">Login</h1>
                     <div class="field">
                         <p class="control has-icons-left ">
-                            <input class="input" type="email" placeholder="Email" id="email" />
+                            <input required class="input" type="email" placeholder="Email" id="email" />
                             <span class="icon is-small is-left" >
                                 <i class="fas fa-envelope"></i>
                             </span>
@@ -45,7 +45,7 @@ class Login extends Component{
                     </div>
                     <div class="field">
                         <p class="control has-icons-left has-icons-right">
-                            <input class="input" type="password" placeholder="Password" id="password" />
+                            <input required class="input" type="password" placeholder="Password" id="password" />
                             <span class="icon is-small is-left">
                             <i class="fas fa-lock"></i>
                             </span>
@@ -63,7 +63,7 @@ class Login extends Component{
                         <p class="control down">New User? <Link to="/signup" id="signupLink">click here</Link></p>
                     </div>
                 </div>
-            </div>
+            </form>
             </div>
         );
     }

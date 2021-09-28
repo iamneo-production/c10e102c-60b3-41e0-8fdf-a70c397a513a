@@ -44,12 +44,12 @@ class SignUp extends Component{
                     </p>
                 </div>
             </nav>
-            <div class="content-container">
+            <form class="content-container">
                 <div class="signup-form" id="signupBox">
                     <h1 class="title text is-warning">Sign Up</h1>
                     <div class="field">
                         <p class="control has-icons-left ">
-                            <input class="input" type="email" placeholder="Enter Email" id="email" />
+                            <input required class="input" type="email" placeholder="Enter Email" id="email" />
                             <span class="icon is-small is-left" >
                                 <i class="fas fa-envelope"></i>
                             </span>
@@ -57,7 +57,7 @@ class SignUp extends Component{
                     </div>
                     <div class="field">
                         <p class="control has-icons-left ">
-                            <input class="input" type="text" placeholder="Enter Username" id="username" />
+                            <input required class="input" type="text" placeholder="Enter Username" id="username" />
                             <span class="icon is-small is-left" >
                                 <i class="fas fa-user"></i>
                             </span>
@@ -65,7 +65,7 @@ class SignUp extends Component{
                     </div>
                     <div class="field">
                         <p class="control has-icons-left ">
-                            <input class="input" type="tel" placeholder="Enter Mobile Number" id="mobilenumber" />
+                            <input required class="input" type="tel" placeholder="Enter Mobile Number" id="mobilenumber" />
                             <span class="icon is-small is-left" >
                                 <i class="fas fa-phone-alt"></i>
                             </span>
@@ -73,7 +73,7 @@ class SignUp extends Component{
                     </div>
                     <div class="field">
                         <p class="control has-icons-left has-icons-right">
-                            <input class="input" type="password" placeholder="Enter Password" id="password" />
+                            <input required class="input" type="password" placeholder="Enter Password" id="password" />
                             <span class="icon is-small is-left">
                                 <i class="fas fa-lock"></i>
                             </span>
@@ -84,7 +84,7 @@ class SignUp extends Component{
                     </div>
                     <div class="field">
                         <p class="control has-icons-left  has-icons-right">
-                            <input class="input" type="password" placeholder="Confirm Password" id="confirmpassword" />
+                            <input required class="input" type="password" placeholder="Confirm Password" id="confirmpassword" />
                             <span class="icon is-small is-left">
                             <i class="fas fa-lock"></i>
                             </span>
@@ -102,7 +102,7 @@ class SignUp extends Component{
                         <p class="control down">Already a member? <Link to="/login" id="signinLink">click here</Link></p>
                     </div>
                 </div>
-            </div>
+            </form>
             </div>
         );
     }
