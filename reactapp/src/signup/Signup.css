@@ -18,7 +18,7 @@
 
 .signup-form {
     width: 400px;
-    height: 500px;
+    height: 530px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -55,6 +55,18 @@
     text-align: left;
     margin-top: 3px;
     color: red;
+    display: none;
+}
+
+.margin-down {
+    margin-bottom: 5px;
+}
+
+.success {
+    color: green;
+    margin-bottom: 5px;
+    text-align: left;
+    font-size: 18px;
     display: none;
 }
 

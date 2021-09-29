@@ -2,7 +2,7 @@ import './App';
 import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
 import Login from './login/Login';
 import SignUp from './signup/Signup';
-import auth from './AuthApi';
+import Home from './home/Home';
 
 function App() {
   return (
@@ -17,12 +17,12 @@ const Routes = () => {
     <Switch>
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={SignUp} />
-      <ProtectedRoute exact auth={auth.isAuthenticatedUser()} path="/home" component={SignUp} />
-      <ProtectedRoute exact auth={auth.isAuthenticatedUser()} path="/cart" component={SignUp} />
-      <ProtectedRoute exact auth={auth.isAuthenticatedUser()} path="/orders" component={SignUp} />
-      <ProtectedRoute exact auth={auth.isAuthenticatedAdmin()} path="/admin" component={SignUp} />
-      <ProtectedRoute exact auth={auth.isAuthenticatedAdmin()} path="/addProduct" component={SignUp} />
-      <ProtectedRoute exact auth={auth.isAuthenticatedAdmin()} path="/admin/orders" component={SignUp} />
+      <ProtectedRoute exact auth={sessionStorage.getItem("user") != null && sessionStorage.getItem("user") === "true"} path="/home" component={Home} />
+      <ProtectedRoute exact auth={sessionStorage.getItem("user") != null && sessionStorage.getItem("user") === "true"} path="/cart" component={Home} />
+      <ProtectedRoute exact auth={sessionStorage.getItem("user") != null && sessionStorage.getItem("user") === "true"} path="/orders" component={Home} />
+      <ProtectedRoute exact auth={sessionStorage.getItem("admin") != null && sessionStorage.getItem("admin") === "true"} path="/admin" component={Home} />
+      <ProtectedRoute exact auth={sessionStorage.getItem("admin") != null && sessionStorage.getItem("admin") === "true"} path="/addProduct" component={Home} />
+      <ProtectedRoute exact auth={sessionStorage.getItem("admin") != null && sessionStorage.getItem("admin") === "true"} path="/admin/orders" component={Home} />
       <Route exact path="/" render={() => <Redirect to="/login" />} />
     </Switch>
   );
@@ -30,7 +30,7 @@ const Routes = () => {
 
 const ProtectedRoute = ({auth, component:Component, ...rest}) => {
   return(
-    <Route {...rest} render={() => auth ? ( <Component /> ): (<Redirect to='/login' />) }/>
+    <Route {...rest} render={(props) => auth ? ( <Component {...props}/> ): (<Redirect to='/login' />) }/>
   );
 }
 

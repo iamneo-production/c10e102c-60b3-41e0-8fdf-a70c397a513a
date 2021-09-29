@@ -57,7 +57,15 @@ class SignUp extends Component{
             }
             console.log(data);
             axios.post(`https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/signup`, data).then((res) => {
-                console.log(res.data);
+                if(res.data === "Already exists"){
+                    document.querySelector(".margin-down").style.display = "block";
+                }else if(res.data === "Saved Successfully"){
+                    document.querySelector(".margin-down").style.display = "none";
+                    document.querySelector(".success").style.display = "block";
+                    setTimeout(() => {
+                        this.props.history.push("/login");
+                    }, 2500);
+                }
             })
         }
     }
@@ -103,6 +111,8 @@ class SignUp extends Component{
             <form className="content-container" onSubmit={this.formClick}>
                 <div className="signup-form" id="signupBox">
                     <h1 className="title text is-warning">Sign Up</h1>
+                    <p className="warning margin-down">User already exists. Login to continue</p>
+                    <p className="success">User Created Successfully.</p>
                     <div className="field">
                         <p className="control has-icons-left ">
                             <input required className="input" type="email" placeholder="Enter Email" id="email"  onChange={this.emailOnChange} />
