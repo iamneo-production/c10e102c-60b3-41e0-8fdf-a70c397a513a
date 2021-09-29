@@ -27,7 +27,9 @@ public class ProductService {
 
     ProductModel productEditData(@PathVariable String id)
     {
-        return productRepository.findOne(id);
+        Optional<ProductModel> prodOptional = productRepository.findById(id);
+        ProductModel prod = prodOptional.orElse(null);
+        return prod;
     }
 
     void productEditSave(@RequestBody ProductModel data)
@@ -39,10 +41,9 @@ public class ProductService {
     {
         productRepository.save(data);
     }
-
     void productDelete(@PathVariable String id)
     {
-        productRepository.delete(id);
+        productRepository.deleteById(id);
     }
 
 }
