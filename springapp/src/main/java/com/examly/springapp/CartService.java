@@ -16,7 +16,7 @@ public class CartService {
     public void addToCart(String quantity, String id) {
         Optional<ProductModel> productOptional = productRepository.findById(id);
         ProductModel product = productOptional.orElse(null);
-        CartModel cart = new CartModel(product.getProductName(), quantity, product.getPrice());
+        CartModel cart = new CartModel(product.getProductName(), Integer.parseInt(quantity), product.getPrice());
         cartRepository.save(cart);
     }
     public List<CartTempModel> showCart(String id) {
