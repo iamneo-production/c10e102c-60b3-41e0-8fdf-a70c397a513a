@@ -1,12 +1,18 @@
 // eslint-disable-next-line
 import React, {Component} from 'react';
 import './Login.css';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 var pass = true;
 
 class Login extends Component{
+
+    constructor(props){
+        super(props);
+        this.props = props;
+        console.log(this.props.history);
+    }
 
     state = {
         email: "",
@@ -31,15 +37,21 @@ class Login extends Component{
             "password": this.state.password
         }
         console.log(hashedPass);
-        axios.post(`https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/login`, data).then((res) => {
-            console.log(res.data);
-            if(res.data){
-                sessionStorage.setItem("user", "true");
-                setTimeout(() => this.props.history.push('/home'), 2000);
-            }else{
-                document.querySelector(".warning").style.display = "block";
-            }
-        })
+        if(this.state.email === "admin" && this.state.password === "admin"){
+            localStorage.setItem("admin", "true");
+            this.props.history.go('/admin');
+        }else{
+            axios.post(`https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/login`, data).then((res) => {
+                console.log(res.data);
+                if(res.data){
+                    localStorage.setItem("user", "true");
+                    this.setState({redirect: true});
+                    this.props.history.go("/home");
+                }else{
+                    document.querySelector(".warning").style.display = "block";
+                }
+            })
+        }
     }
 
     showPassword(e){
@@ -57,15 +69,15 @@ class Login extends Component{
     }
     
     render(){
-        if(this.state.redirect){
-            return <Redirect to='/home' />;
-        }
+        // if(this.state.redirect){
+        //     console.log(localStorage.getItem("user"));
+        //     return (<Redirect to='/home' />);
+        // }
         return(
             <div className="has-navbar-fixed-top">
             <nav className="navbar is-warning is-fixed-top is-small" role="navigation" aria-label="main navigation">
                 <div className="navbar-brand">
-                    <p className="navbar-item h1" href="
-                    https://bulma.io" id="dressHomeButton">
+                    <p className="navbar-item h1" id="dressHomeButton">
                     Fantasy Dress
                     </p>
                 </div>
@@ -76,7 +88,7 @@ class Login extends Component{
                     <p className="warning margin-down">Username or Password is incorrect* </p>
                     <div className="field">
                         <p className="control has-icons-left ">
-                            <input required className="input" type="email" placeholder="Email" id="email" onChange={this.emailChange}/>
+                            <input required className="input" type="text" placeholder="Email" id="email" onChange={this.emailChange}/>
                             <span className="icon is-small is-left" >
                                 <i className="fas fa-envelope"></i>
                             </span>

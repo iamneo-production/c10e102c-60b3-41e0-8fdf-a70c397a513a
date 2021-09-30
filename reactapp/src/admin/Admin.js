@@ -1,7 +1,7 @@
 import { Component } from "react";
 import {Link} from 'react-router-dom';
 
-class Home  extends Component{
+class Admin  extends Component{
     constructor(props){
         super(props);
         this.props = props;
@@ -9,23 +9,23 @@ class Home  extends Component{
     }
 
     buttonClick = () => {
-        localStorage.removeItem("user");
+        localStorage.removeItem("admin");
         this.props.history.go('/login');
     }
 
     render() {
         return (
             <div>
-                <h1>Home</h1>
+                <h1>Admin</h1>
                 <button onClick={this.buttonClick}>Submit</button>
                 <ul>
-                    <li><Link to="/home"> Home</Link></li>
-                    <li><Link to="/cart"> Cart</Link></li>
-                    <li><Link to="/orders"> Orders</Link></li>
+                    <li><Link to="/admin"> Product</Link></li>
+                    <li><Link to="/admin/orders"> Orders</Link></li>
+                    <li><Link to="/addProducts"> add products</Link></li>
                 </ul>
             </div>
         );
     }
 }
 
-export default Home;
+export default Admin;
