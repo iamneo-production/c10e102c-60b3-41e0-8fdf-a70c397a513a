@@ -14,7 +14,8 @@ public class CartService {
 
     // Methods
     public void addToCart(String quantity, String id) {
-        ProductModel product = productRepository.stream().filter(t -> t.getProductId().equals(id)).findFirst().get();
+        Optional<ProductModel> productOptional = productRepository.findById(id);
+        ProductModel product = productOptional.orElse(null);
         CartModel cart = new CartModel(product.getProductName(), quantity, product.getPrice());
         cartRepository.save(cart);
     }
