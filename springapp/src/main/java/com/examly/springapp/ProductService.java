@@ -1,6 +1,5 @@
 package com.examly.springapp;
 
-import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.*;
@@ -25,23 +24,23 @@ public class ProductService {
         return productsHome;
     }
 
-    ProductModel productEditData(@PathVariable String id)
+    ProductModel productEditData(String id)
     {
         Optional<ProductModel> prodOptional = productRepository.findById(id);
         ProductModel prod = prodOptional.orElse(null);
         return prod;
     }
 
-    void productEditSave(@RequestBody ProductModel data)
+    void productEditSave(ProductModel data)
     {
         productRepository.save(data);
     }
 
-    void productSave(@RequestBody ProductModel data)
+    void productSave(ProductModel data)
     {
         productRepository.save(data);
     }
-    void productDelete(@PathVariable String id)
+    void productDelete(String id)
     {
         productRepository.deleteById(id);
     }
