@@ -1,17 +1,30 @@
 package com.examly.springapp;
 
 import java.io.ObjectInputFilter.Status;
-
+import javax.persistence.*;
+import java.util.*;
+@Entity
+@Table(name = "orders")
 public class OrderModel {
     
     // Class Variables
+    @Id
     private String orderId;
+    @Transient
     private String userId;
+    @Transient
     private String ProductName;
+    @Transient
     private int quantity;
     private String totalPrice;
     private String Status;
     private String Price;
+
+    @ManyToOne
+    private UserModel user;
+
+    @OneToMany
+    private List<ProductModel> products;
 
     // No Args Constructor
     public OrderModel() {

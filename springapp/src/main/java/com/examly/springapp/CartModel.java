@@ -1,13 +1,31 @@
 package com.examly.springapp;
+import javax.persistence.*;
+import com.examly.springapp.ProductModel;
 
+// import java.beans.Transient;
+import java.util.*;
+
+@Entity
+@Table(name = "cart")
 public class CartModel {
     
     // Class Variables
+    @Id
     private String cartItemId;
+    @Transient
     private UserModel userId;
+    @Transient
     private String ProductName;
     private int Quantity;
     private String Price;
+
+
+    @OneToMany
+    @JoinColumn(name = "productName")
+    private List<ProductModel> products;
+
+    @OneToOne
+    private UserModel user;
 
     // No Args Constructor
     public CartModel() {

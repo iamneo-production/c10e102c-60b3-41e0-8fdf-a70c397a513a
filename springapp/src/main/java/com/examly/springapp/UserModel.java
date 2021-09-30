@@ -16,8 +16,10 @@ public class UserModel {
     private Boolean active;
     private String role;
     @Transient
+    @OneToOne
     private CartModel cart;
     @Transient
+    @OneToMany
     private List<OrderModel> ordersList;
 
     // No Args Constructor

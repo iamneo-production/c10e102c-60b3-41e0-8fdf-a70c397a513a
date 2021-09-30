@@ -1,14 +1,28 @@
 package com.examly.springapp;
+import javax.persistence.*;
+
+@Entity
+@Table(name = "product")
 
 public class ProductModel {
     
     // Class Members
     private String productId;
     private String imageUrl;
+    @Id
+    // @Column(name = "")
     private String productName;
     private String price;
     private String description;
     private String quantity;
+
+    @ManyToOne
+    @Transient
+    private CartModel cart;
+
+    @ManyToOne
+    @Transient
+    private OrderModel order;
 
     // No Args Constructor
     public ProductModel() {
