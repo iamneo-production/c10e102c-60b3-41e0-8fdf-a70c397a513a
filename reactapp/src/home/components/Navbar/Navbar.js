@@ -1,9 +1,9 @@
-import './AdminNav.css';
+import './Navbar.css';
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
-class AdminNav extends Component{
+class Navbar extends Component{
     constructor(props){
         super(props);
         this.props = props;
@@ -15,7 +15,7 @@ class AdminNav extends Component{
     }
 
     buttonClick = () => {
-        localStorage.removeItem("admin");
+        localStorage.removeItem("user");
         this.props.history.go('/login');
     }
 
@@ -24,10 +24,10 @@ class AdminNav extends Component{
         <nav className="navbar is-warning" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
                 <p className="navbar-item company" id="dressHomeButton">
-                Fantasy Dress
+                Fantasy-Dress
                 </p>
 
-                <button className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={this.navbarClick}>
+                <button className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample"onClick={this.navbarClick}>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
@@ -36,13 +36,16 @@ class AdminNav extends Component{
 
             <div id="navbarBasicExample" className="navbar-menu">
                 <div className="navbar-start">
-
-                <Link to="/admin" className="navbar-item" id="adminProductButton">
-                <i className="fas fa-shopping-cart"></i>Product
+                <Link to="/home" className="navbar-item" id="dressHome">
+                <i className="fas fa-home"></i>Home
                 </Link>
 
-                <Link to="/admin/orders" className="navbar-item" id="adminOrderButton">
-                <i className="fas fa-truck"></i>  Orders
+                <Link to="/cart" className="navbar-item" id="dressCartButton">
+                <i className="fas fa-cart-plus"></i>Cart
+                </Link>
+
+                <Link to="/orders" className="navbar-item" id="dressOrderButton">
+                <i className="fas fa-truck-loading"></i>My Order
                 </Link>
                 </div>
 
@@ -50,15 +53,15 @@ class AdminNav extends Component{
                 <div className="navbar-item">
                     <div className="buttons">
                     <button className="button is-danger" id="logoutButton" onClick={this.buttonClick}>
-                    <i className="fas fa-sign-out-alt"></i> Log out
+                    <i className="fas fa-sign-out-alt"></i>Log out
                     </button>
                     </div>
                 </div>
                 </div>
             </div>
         </nav>
-        );
-    }
+    );
+        }
 }
 
-export default AdminNav;
+export default Navbar;

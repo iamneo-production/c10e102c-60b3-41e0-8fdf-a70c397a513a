@@ -29,13 +29,13 @@ class Login extends Component{
 
     formSubmit = (e) => {
         e.preventDefault();
-        var passHash = require('password-hash');
-        var hashedPass = passHash.generate(this.state.password);
+        // var passHash = require('password-hash');
+        // var hashedPass = passHash.generate(this.state.password);
         const data = {
             "email": this.state.email, 
             "password": this.state.password
         }
-        console.log(hashedPass);
+        // console.log(hashedPass);
         if(this.state.email === "admin" && this.state.password === "admin"){
             localStorage.setItem("admin", "true");
             this.props.history.go('/admin');

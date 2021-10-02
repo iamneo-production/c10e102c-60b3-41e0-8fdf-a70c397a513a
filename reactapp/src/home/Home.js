@@ -1,11 +1,11 @@
 import { Component } from "react";
-import {Link} from 'react-router-dom';
+import Navbar from './components/Navbar/Navbar';
+import Footer from './components/Footer/index';
 
 class Home  extends Component{
     constructor(props){
         super(props);
         this.props = props;
-        console.log(this.props.history);
     }
 
     buttonClick = () => {
@@ -14,15 +14,12 @@ class Home  extends Component{
     }
 
     render() {
+        const Inner = this.props.inner;
         return (
             <div>
-                <h1>Home</h1>
-                <button onClick={this.buttonClick}>Submit</button>
-                <ul>
-                    <li><Link to="/home"> Home</Link></li>
-                    <li><Link to="/cart"> Cart</Link></li>
-                    <li><Link to="/orders"> Orders</Link></li>
-                </ul>
+                <Navbar {...this.props}/>
+                <Inner />
+                <Footer />
             </div>
         );
     }

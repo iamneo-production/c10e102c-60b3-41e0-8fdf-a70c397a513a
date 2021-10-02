@@ -23,6 +23,6 @@ code {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to top, #008aff, #00ffe7);
+  background: linear-gradient(to top, #eeff00, #ffee00);
   border-radius: 200px;
 }
