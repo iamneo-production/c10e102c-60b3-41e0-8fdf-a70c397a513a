@@ -11,7 +11,6 @@ class Login extends Component{
     constructor(props){
         super(props);
         this.props = props;
-        console.log(this.props.history);
     }
 
     state = {
@@ -69,10 +68,6 @@ class Login extends Component{
     }
     
     render(){
-        // if(this.state.redirect){
-        //     console.log(localStorage.getItem("user"));
-        //     return (<Redirect to='/home' />);
-        // }
         return(
             <div className="has-navbar-fixed-top">
             <nav className="navbar is-warning is-fixed-top is-small" role="navigation" aria-label="main navigation">

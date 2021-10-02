@@ -4,6 +4,7 @@ import Login from './login/Login';
 import SignUp from './signup/Signup';
 import Home from './home/Home';
 import Admin from './admin/Admin';
+import OrderList from './admin/orderlist/OrderList';
 
 function App() {
   return (
@@ -30,9 +31,9 @@ const Routes = () => {
       <ProtectedRoute exact auth={localStorage.getItem("user") != null && localStorage.getItem("user") === "true"} path="/home" component={Home}  />
       <ProtectedRoute exact auth={localStorage.getItem("user") != null && localStorage.getItem("user") === "true"} path="/cart" component={Home} />
       <ProtectedRoute exact auth={localStorage.getItem("user") != null && localStorage.getItem("user") === "true"} path="/orders" component={Home} />
-      <ProtectedRoute exact auth={localStorage.getItem("admin") != null && localStorage.getItem("admin") === "true"} path="/admin" component={Admin} />
-      <ProtectedRoute exact auth={localStorage.getItem("admin") != null && localStorage.getItem("admin") === "true"} path="/addProduct" component={Admin} />
-      <ProtectedRoute exact auth={localStorage.getItem("admin") != null && localStorage.getItem("admin") === "true"} path="/admin/orders" component={Admin} />\
+      <ProtectedRoute exact auth={localStorage.getItem("admin") != null && localStorage.getItem("admin") === "true"} path="/admin" component={Admin} inner={Home}/>
+      <ProtectedRoute exact auth={localStorage.getItem("admin") != null && localStorage.getItem("admin") === "true"} path="/addProduct" component={Admin} inner={Home}/>
+      <ProtectedRoute exact auth={localStorage.getItem("admin") != null && localStorage.getItem("admin") === "true"} path="/admin/orders" component={Admin} inner={OrderList}/>
     </Switch>
   );
 }
@@ -43,9 +44,9 @@ const ProtectedLoginRoute = ({auth, component: Component, ...rest}) => {
   );
 }
 
-const ProtectedRoute = ({auth, component:Component, ...rest}) => {
+const ProtectedRoute = ({auth, component:Component, inner, ...rest}) => {
   return(
-    <Route {...rest} render={(props) => auth ? ( <Component {...props}/> ): (<Redirect to='/login' />) }/>
+    <Route {...rest} render={(props) => auth ? ( <Component {...props} inner={inner}/> ): (<Redirect to='/login' />) }/>
   );
 }
 
