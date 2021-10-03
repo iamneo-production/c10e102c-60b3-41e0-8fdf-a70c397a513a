@@ -1,16 +1,17 @@
 import React from 'react';
 
 
+
 import { Link } from 'react-router-dom';
-import { cartItems} from '../cart/data';
+import { myorderItems} from './data';
 import {
  
   ProductsContainer,
   PrtButton
 } from '../components/Products/ProductsElements';
-import {FaTrash } from "react-icons/fa";
 
-export default function CartScreen() {
+
+export default function orderScreen() {
 
 
   
@@ -29,76 +30,72 @@ export default function CartScreen() {
           Price
         </div>
         <div>Quantity</div>
+
+        <div>Total Price</div>
         <div></div>
       </li>
       
       {
-        cartItems.length === 0 ?
+        myorderItems.length === 0 ?
           <div>
             Cart is empty
         </div>
           :
-          cartItems.map(item =>
+          myorderItems.map(items =>
             <li>
             <div >
                <Link to="/" >
              
-                <img src={item.img} alt="product" />
+                <img src={items.img} alt="product" />
               
               </Link>
               </div >
              
               <div style={{margin:30,alignContent:'center'}}>
-                 {item.productName}
+                 {items.productName}
                 
               </div>
               <div style={{margin:30,alignContent:'center'}} >
-                ${item.price}
+                ${items.price}
               </div>
               <div style={{margin:30,alignContent:'center'}} >
                 
                  
-                {item.quanity}
+                {items.quanity}
               
             
            
           </div>
-              <div>
+          
+          <div style={{margin:30,alignContent:'center'}} >
                 
-                <button type="button" style={{background:'#e31837',color:'#fff',cursor:'pointer',margin: 10,borderRadius:5}} >
-                
-                < FaTrash  />
-                
+                 
+          {myorderItems.reduce((a, c) => a + parseInt(c.price) * parseInt(c.quanity),0)} ₹
+
+              
+            
            
-                </button>
-              </div>
+          </div>
+          
+             
+              
             </li>
           )
       }
     </ul>
   </div>
   {
-    cartItems.length === 0 ?
+    myorderItems.length === 0 ?
     <Link to='/'>
     <>
   
     <PrtButton  >
    Go For Shopping
  </PrtButton></></Link>:
-<div className="cart-action" disabled={cartItems.length === 0}>
-<h3>
-        Subtotal ({
-cartItems.reduce((a, c) => a + parseInt(c.quanity),0)
-} Items):
-  
-{cartItems.reduce((a, c) => a + parseInt(c.price) * parseInt(c.quanity),0)} ₹
-</h3>
- <div>
- <PrtButton className="button primary full-width" >
-   Proceed to Checkout
- </PrtButton>
-</div>
-</div>
+<>
+
+ 
+</>
 
 }
 </div>

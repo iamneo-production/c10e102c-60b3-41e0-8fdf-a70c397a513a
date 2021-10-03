@@ -22,6 +22,9 @@ import ProductScreen from './pages/ProductScreen';
 import { BrowserRouter , Switch, Route } from 'react-router-dom';
 //import Home from './pages';
 import About from './pages/about';
+import CartScreen from './cart/cartScreen';
+import orderScreen from './order/orderScreen';
+
 //import Events from './pages/events';
 //import AnnualReport from './pages/annual';
 //import Teams from './pages/team';
@@ -37,15 +40,16 @@ function App() {
 	<Switch>
 		<Route path='/' exact component={About} />
 		<Route path='/events' component={About} />
-		<Route path='/about' component={About} />
-    <Route path='/about' component={About} />
+		<Route path='/cart' component={CartScreen} />
+    <Route path='/myorder' component={orderScreen} />
 	<Route path='/about' component={About} />
     <Route path='/about' component={About} />
 		<Route path='/about' component={About} />
 		
+	
+	</Switch>
 	<Route path="/product/:id" component={ProductScreen}/>
 
-	</Switch>
 
 	<Footer />
 	</BrowserRouter>

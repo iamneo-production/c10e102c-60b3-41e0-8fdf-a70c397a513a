@@ -1,7 +1,7 @@
 import product1 from '../../images/product1.jpg';
 import product2 from '../../images/product 2.jpg';
 import product3 from '../../images/product 3.jpg';
-
+import womendress from '../../images/womenDress.jpg';
 
 export const productData = [
   {
@@ -12,7 +12,8 @@ export const productData = [
       'Famous suits of jodhpur',
     price: '1200-/Rs',
     button: 'Add to Cart',
-    button1:'Buy Now'
+    button1:'Buy Now',
+    src:[womendress,product1,womendress]
   },
   {
     img: product2,
@@ -22,7 +23,8 @@ export const productData = [
       ' Best Designer shirt in cotton ',
     price: '700-/Rs',
     button: 'Add to Cart',
-    button1:'Buy Now'
+    button1:'Buy Now',
+    src:[womendress,product1,womendress]
   },
   {
     img: product3,
@@ -33,7 +35,8 @@ export const productData = [
     price: '1100-/Rs',
     button: 'Add to Cart',
     button1:'Buy Now'
-    
+    ,
+    src:[womendress,product1,womendress]
   }
   ,{
     img: product1,
@@ -43,7 +46,8 @@ export const productData = [
       'Famous suits of jodhpur',
     price: '1200-/Rs',
     button: 'Add to Cart',
-    button1:'Buy Now'
+    button1:'Buy Now',
+    src:[womendress,product1,womendress]
   },
   {
     img: product2,
@@ -53,7 +57,8 @@ export const productData = [
       ' Best Designer shirt in cotton ',
     price: '700-/Rs',
     button: 'Add to Cart',
-    button1:'Buy Now'
+    button1:'Buy Now',
+    src:[womendress,product1,womendress]
   },
   {
     img: product3,
@@ -63,6 +68,7 @@ export const productData = [
       'Formal shirts for offices in cotton',
     price: '1100-/Rs',
     button: 'Add to Cart',
-    button1:'Buy Now'
+    button1:'Buy Now',
+    src:[womendress,product1,womendress]
   }
 ];

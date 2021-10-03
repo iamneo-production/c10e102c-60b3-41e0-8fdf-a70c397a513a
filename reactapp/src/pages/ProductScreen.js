@@ -139,7 +139,14 @@ export default function ProductScreen  () {
 }}*/
 
 import React from 'react'
-
+import '../../../reactapp/src/';
+import {
+ProductsContainer,
+  ProductButton
+} from '../components/Products/ProductsElements';
+import { Link } from 'react-router-dom';
+import Rating from '../components/Rating/Rating';
+import DetailsThumb from '../components/Products/DetailsThumb';
 
 export default class ProductScreen extends React.Component{
 
@@ -152,30 +159,128 @@ export default class ProductScreen extends React.Component{
 
     }
 
+   
 
 alertMessage(){
        console.log(this.props.location.state.id);
        
-    }
+    } 
+    
 
 render(){
   
 return (
-  
+ <ProductsContainer>
+  <div className="app">
+        {
+          
+            <div className="details" key={this.props.location.state.id}>
+              <div className="big-img">
+                <img src={this.props.location.state.img} alt={this.props.location.state.alt}/>
+              </div>
 
-    <>
-     {/* the below is the id we are accessing */}
+              <div className="box">
+                <div className="row">
+                  <h2>{this.props.location.state.name}</h2>
+              
+                  <h3>price:{this.props.location.state.price}</h3>
+                </div>
+               
+               
+                <p>{this.props.location.state.desc}</p>
+                <p>{this.props.location.state.desc}</p>
 
-      hay! I am detail no {this.props.location.state.id} and my name is 
-      {this.props.location.state.name}
+                <DetailsThumb images={this.props.location.state.src} tab={this.handleTab} myRef={this.myRef}  />
+                <ProductButton>{this.props.location.state.button}</ProductButton>
+                <ProductButton>{this.props.location.state.button1}</ProductButton>
+               
+              </div>
+              
+            </div>
+          
+        }
+      </div>
+      </ProductsContainer>
+ /* <div>
+    
+      <div>
+        <Link to="/about">Back to result</Link>
+        <div className="row top">
+          <div className="col-2">
+          <img
+              className="large"
+              src={this.props.location.state.img}
+              alt={this.props.location.state.alt}
+            ></img>
+          </div>
+          <div className="col-1">
+            <ul>
+              <li>
+                <h1>{this.props.location.state.name}</h1>
+              </li>
+              <li>
+                <Rating
+                  rating={3}
+                  numReviews={34}
+                ></Rating>
+              </li>
+              <li>Pirce : ${this.props.location.state.price}</li>
+              <li>
+                Description:
+                <p>{this.props.location.state.desc}</p>
+              </li>
+            </ul>
+          </div>
+          <div className="col-1">
+            <div className="card card-body">
+              <ul>
+                <li>
+                  
+                 
+                  <Rating
+                    rating={4}
+                    numReviews={5}
+                  ></Rating>
+                </li>
+                <li>
+                  <div className="row">
+                    <div>Price</div>
+                    <div className="price">${this.props.location.state.price}</div>
+                  </div>
+                </li>
+                <li>
+                  <div className="row">
+                    <div>Status</div>
+                    <div>
+                      {5 > 0 ? (
+                        <span className="success">In Stock</span>
+                      ) : (
+                        <span className="danger">Unavailable</span>
+                      )}
+                    </div>
+                  </div>
+                </li>
+                {5 > 0 && (
+                  <>
+                    
+                    <li>
+                      <button
+                       
+                        className="primary block"
+                      >
+                        Add to Cart
+                      </button>
+                    </li>
+                  </>
+                )}
+              </ul>
+            </div>
+          </div>
+        </div>
 
-      <br/>
-      <br/>
-
- {/* press me to see the log in your browser console */}
-<button onClick={()=>{this.alertMessage()}}>click me to see log</button>
-
-    </>
+      </div>
+    
+  </div>*/
      )
     }
     

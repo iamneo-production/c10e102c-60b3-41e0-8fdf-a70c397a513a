@@ -24,7 +24,7 @@ const Products = ({ heading, data }) => {
           return (
             
             <ProductCard key={index} >
-              <Link to={{pathname:`/product/${product.name}}`, state: {id: 1, name: product.name, shirt: 'green'}}}>
+              <Link to={{pathname:`/product/${product.name}}`, state: {id: index, name: product.name, desc: product.desc,img: product.img,alt:product.alt,price:product.price,button:product.button,button1:product.button1,src :product.src}}}>
               <ProductImg src={product.img} alt={product.alt}   />
               
               </Link>
@@ -35,6 +35,7 @@ const Products = ({ heading, data }) => {
                
                
                 <ProductButton>{product.button}</ProductButton>
+                
                 <ProductButton>{product.button1}</ProductButton>
                 
               </ProductInfo>

@@ -22,10 +22,10 @@ return (
 		<NavLink to='/events' activeStyle>
 			Home
 		</NavLink>
-		<NavLink to='/annual' activeStyle>
+		<NavLink to='/cart' activeStyle>
 			Cart
 		</NavLink>
-		<NavLink to='/team' activeStyle>
+		<NavLink to='/myorder' activeStyle>
 			My order
 		</NavLink>
 	
