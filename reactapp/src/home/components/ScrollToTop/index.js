@@ -26,10 +26,8 @@ const ScrollToTop = () => {
             onClick={scrollToTop}
             style={{
                 display: 'flex',
-                justifyContent: 'center',
-                
+                justifyContent: 'center',  
                 alignItems: 'center',
-                
             }}
         >
             < FaArrowUp  />
