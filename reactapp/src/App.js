@@ -1,4 +1,4 @@
-import './App';
+import './App.css';
 import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
 import Login from './login/Login';
 import SignUp from './signup/Signup';
@@ -8,6 +8,8 @@ import OrderList from './admin/orderlist/OrderList';
 import About from './home/pages/about';
 import Temp from './Temp/Temp';
 import PageNotFound from './PageNotFound/PageNotFound';
+import CartScreen from './cart/cartScreen';
+import OrderScreen from './order/orderScreen';
 
 function App() {
   return (
@@ -32,8 +34,8 @@ const Routes = () => {
       <ProtectedLoginRoute exact auth={(localStorage.getItem("user") == null || localStorage.getItem("user") !== "true") && (localStorage.getItem("admin") == null || localStorage.getItem("admin") !== "true")} path="/login" component={Login} />
       <ProtectedLoginRoute exact path="/signup" auth={(localStorage.getItem("user") == null || localStorage.getItem("user") !== "true") && (localStorage.getItem("admin") == null || localStorage.getItem("admin") !== "true")} component={SignUp} />
       <ProtectedRoute exact auth={localStorage.getItem("user") != null && localStorage.getItem("user") === "true"} path="/home" component={Home} inner={About} />
-      <ProtectedRoute exact auth={localStorage.getItem("user") != null && localStorage.getItem("user") === "true"} path="/cart" component={Home} inner={Temp}/>
-      <ProtectedRoute exact auth={localStorage.getItem("user") != null && localStorage.getItem("user") === "true"} path="/orders" component={Home} inner={Temp}/>
+      <ProtectedRoute exact auth={localStorage.getItem("user") != null && localStorage.getItem("user") === "true"} path="/cart" component={Home} inner={CartScreen}/>
+      <ProtectedRoute exact auth={localStorage.getItem("user") != null && localStorage.getItem("user") === "true"} path="/orders" component={Home} inner={OrderScreen}/>
       <ProtectedRoute exact auth={localStorage.getItem("admin") != null && localStorage.getItem("admin") === "true"} path="/admin" component={Admin} inner={Temp}/>
       <ProtectedRoute exact auth={localStorage.getItem("admin") != null && localStorage.getItem("admin") === "true"} path="/addProduct" component={Admin} inner={Temp}/>
       <ProtectedRoute exact auth={localStorage.getItem("admin") != null && localStorage.getItem("admin") === "true"} path="/admin/orders" component={Admin} inner={OrderList}/>
