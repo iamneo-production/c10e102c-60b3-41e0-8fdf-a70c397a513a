@@ -144,8 +144,8 @@ import {
 ProductsContainer,
   ProductButton
 } from '../components/Products/ProductsElements';
-import { Link } from 'react-router-dom';
-import Rating from '../components/Rating/Rating';
+//import { Link } from 'react-router-dom';
+//import Rating from '../components/Rating/Rating';
 import DetailsThumb from '../components/Products/DetailsThumb';
 
 export default class ProductScreen extends React.Component{

@@ -22,7 +22,7 @@ export default function orderScreen() {
     <ul className="cart-list-container">
    
       <li style={{background:'#fff700'}}>
-   <h3>Shopping Cart</h3>
+   <h3>Order History</h3>
         <div>
           Product Name
         </div>
@@ -38,7 +38,7 @@ export default function orderScreen() {
       {
         myorderItems.length === 0 ?
           <div>
-            Cart is empty
+            no order history
         </div>
           :
           myorderItems.map(items =>
