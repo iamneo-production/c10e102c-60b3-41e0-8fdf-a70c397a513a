@@ -16,6 +16,7 @@ class Navbar extends Component{
 
     buttonClick = () => {
         localStorage.removeItem("user");
+        localStorage.removeItem("mail");
         this.props.history.go('/login');
     }
 

@@ -12,20 +12,30 @@ public class CartService {
     private CartRepository cartRepository;
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private UserDao dao;
+
     private static int cartItemId = 1;
 
     // Methods
-    public void addToCart(String quantity, UserModel userId, String id) {
+    public UserModel addToCart(String quantity, String userId, String id) {
 
         Optional<ProductModel> productOptional = productRepository.findById(id);
         ProductModel product = productOptional.orElse(null);
-
-        CartModel cart = new CartModel(Integer.toString(cartItemId), userId, product.getProductName(), Integer.parseInt(quantity), product.getPrice());
+        UserModel user = dao.findById(userId).get();
+        CartModel cart = new CartModel(Integer.toString(cartItemId), user, product.getProductName(), Integer.parseInt(quantity), product.getPrice());
         cartRepository.save(cart);
 
         cartItemId++;
+        return user;
 
     }
+    public List<CartModel> show(){
+        List<CartModel> products = new ArrayList<>();
+        cartRepository.findAll().forEach(products::add);
+        return products;
+    }
+
     public List<CartTempModel> showCart(String id) {
 
         List<CartModel> products = new ArrayList<>();

@@ -24,6 +24,11 @@ public class UserModel {
     public UserModel() {
     }
 
+    public UserModel(String email) {
+        this.email = email;
+    }
+
+
     // All Args Constructor
     public UserModel(String email, String password, String username, String mobileNumber, Boolean active, String role, CartModel cart, List<OrderModel> ordersList) {
         super();
