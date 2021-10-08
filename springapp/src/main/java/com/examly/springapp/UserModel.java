@@ -4,14 +4,14 @@ import java.util.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class UserModel {
     
     // Class Members 
     @Id
     private String email;
-    private String password;
     private String username;
+    private String password;
     private String mobileNumber;
     private Boolean active;
     private String role;
@@ -28,8 +28,8 @@ public class UserModel {
     public UserModel(String email, String password, String username, String mobileNumber, Boolean active, String role, CartModel cart, List<OrderModel> ordersList) {
         super();
         this.email = email;
-        this.password = password;
         this.username = username;
+        this.password = password;
         this.mobileNumber = mobileNumber;
         this.active = active;
         this.role = role;

@@ -29,13 +29,6 @@ public class CartModel {
         this.Price = Price;
     }
 
-    // Entity Constructor
-    public CartModel(String ProductName, int Quantity, String Price) {
-        this.ProductName = ProductName;
-        this.Quantity = Quantity;
-        this.Price = Price;
-    }
-
     // Setters and Getters
     public void setCartItemId(String cartItemId) {
         this.cartItemId = cartItemId;

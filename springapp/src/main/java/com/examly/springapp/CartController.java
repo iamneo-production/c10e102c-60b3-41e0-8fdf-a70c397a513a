@@ -12,8 +12,8 @@ public class CartController {
 
     // Methods
     @RequestMapping(method=RequestMethod.POST, value="/home/{id}")
-    public void addToCart(@RequestBody String quantity, @PathVariable String id) {
-        cartService.addToCart(quantity,id);
+    public void addToCart(@RequestBody String quantity, @RequestBody UserModel userId, @PathVariable String id) {
+        cartService.addToCart(quantity, userId, id);
     }
     @RequestMapping(method=RequestMethod.GET, value="/cart/{id}")
     public List<CartTempModel> showCart(@PathVariable String id) {

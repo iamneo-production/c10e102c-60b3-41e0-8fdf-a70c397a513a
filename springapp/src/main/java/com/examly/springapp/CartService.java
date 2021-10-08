@@ -10,14 +10,21 @@ public class CartService {
     
     @Autowired
     private CartRepository cartRepository;
+    @Autowired
     private ProductRepository productRepository;
+    private static int cartItemId = 1;
 
     // Methods
-    public void addToCart(String quantity, String id) {
+    public void addToCart(String quantity, UserModel userId, String id) {
+
         Optional<ProductModel> productOptional = productRepository.findById(id);
         ProductModel product = productOptional.orElse(null);
-        CartModel cart = new CartModel(product.getProductName(), Integer.parseInt(quantity), product.getPrice());
+
+        CartModel cart = new CartModel(Integer.toString(cartItemId), userId, product.getProductName(), Integer.parseInt(quantity), product.getPrice());
         cartRepository.save(cart);
+
+        cartItemId++;
+
     }
     public List<CartTempModel> showCart(String id) {
 
@@ -26,13 +33,14 @@ public class CartService {
         
         cartRepository.findAll().forEach(products::add);
         for(CartModel product:products) {
-            if((product.getUserId()).equals(id)) {
+            if((product.getUserId().getEmail()).equals(id)) {
                 CartTempModel temp = new CartTempModel(product.getProductName(), product.getQuantity(), product.getPrice());
                 products_temp.add(temp);
             }
         }
 
         return products_temp;
+        
     }
     public void deleteCartItem(String id) {
         cartRepository.deleteById(id);
