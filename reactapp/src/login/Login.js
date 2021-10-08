@@ -44,6 +44,7 @@ class Login extends Component{
                 console.log(res.data);
                 if(res.data){
                     localStorage.setItem("user", "true");
+                    localStorage.setItem("mail", data['email']);
                     this.setState({redirect: true});
                     this.props.history.go("/home");
                 }else{

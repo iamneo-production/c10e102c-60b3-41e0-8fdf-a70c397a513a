@@ -51,7 +51,7 @@ class SignUp extends Component{
             const data = {
                 "email": this.state.email,
                 "username": this.state.username,
-                "mobile_num": this.state.mobilenumber,
+                "mobileNumber": this.state.mobilenumber,
                 "password": this.state.password,
                 "role": "user"
             }

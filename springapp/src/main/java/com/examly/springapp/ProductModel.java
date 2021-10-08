@@ -8,9 +8,9 @@ import javax.persistence.*;
 public class ProductModel {
     
     // Class Members
+    @Id
     private String productId;
     private String imageUrl;
-    @Id
     private String productName;
     private String price;
     private String description;

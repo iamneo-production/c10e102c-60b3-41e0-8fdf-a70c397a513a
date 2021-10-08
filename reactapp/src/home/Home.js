@@ -8,11 +8,6 @@ class Home  extends Component{
         this.props = props;
     }
 
-    buttonClick = () => {
-        localStorage.removeItem("user");
-        this.props.history.go('/login');
-    }
-
     render() {
         const Inner = this.props.inner;
         return (
