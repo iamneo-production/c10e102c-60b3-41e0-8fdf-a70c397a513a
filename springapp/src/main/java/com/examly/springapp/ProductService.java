@@ -26,9 +26,7 @@ public class ProductService {
 
     ProductModel productEditData(String id)
     {
-        Optional<ProductModel> prodOptional = productRepository.findById(id);
-        ProductModel prod = prodOptional.orElse(null);
-        return prod;
+        return productRepository.findByProductId(id).get(0);
     }
 
     void productEditSave(ProductModel data)
@@ -42,7 +40,7 @@ public class ProductService {
     }
     void productDelete(String id)
     {
-        productRepository.deleteById(id);
+        ProductModel product = productRepository.findByProductId(id).get(0);
+        productRepository.deleteById(product.getProductName());
     }
-
 }
