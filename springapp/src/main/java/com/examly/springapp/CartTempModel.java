@@ -3,6 +3,7 @@ package com.examly.springapp;
 public class CartTempModel {
     
     // Class Variables
+    private String cartItemId;
     private String ProductName;
     private int Quantity;
     private String Price;
@@ -13,7 +14,8 @@ public class CartTempModel {
     }
 
     // All Args Constructor
-    public CartTempModel(String ProductName, int Quantity, String Price, String imageUrl) {
+    public CartTempModel(String cartItemId, String ProductName, int Quantity, String Price, String imageUrl) {
+        this.cartItemId = cartItemId;
         this.ProductName = ProductName;
         this.Quantity = Quantity;
         this.Price = Price;
@@ -21,6 +23,12 @@ public class CartTempModel {
     }
 
     // Setters and Getters
+    public void setCartItemId(String cartItemId) {
+        this.cartItemId = cartItemId;
+    }
+    public String getCartItemId() {
+        return cartItemId;
+    }
     public void setProductName(String ProductName) {
         this.ProductName = ProductName;
     }

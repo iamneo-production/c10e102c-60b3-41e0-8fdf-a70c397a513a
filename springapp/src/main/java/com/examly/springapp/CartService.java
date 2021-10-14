@@ -12,14 +12,26 @@ public class CartService {
     private CartRepository cartRepository;
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private UserDao userRepository;
 
     // Methods
-    public void addToCart(String quantity, String userId, String id) {
+    public Boolean addToCart(String quantity, String userId, String id) {
 
-        ProductModel product = productRepository.findByProductId(id).get(0);
+        try {
+            ProductModel product = productRepository.findByProductId(id).get(0);
+            if(Integer.parseInt(quantity)>Integer.parseInt(product.getQuantity()) || userRepository.findByEmail(userId).size()==0) {
+                return false;
+            }
 
-        CartModel cart = new CartModel(userId, product.getProductName(), Integer.parseInt(quantity), product.getPrice());
-        cartRepository.save(cart);
+            CartModel cart = new CartModel(userId, product.getProductName(), Integer.parseInt(quantity), product.getPrice());
+            cartRepository.save(cart);
+        }
+        catch(Exception e) {
+            return false;
+        }
+
+        return true;
 
     }
     public List<CartTempModel> showCart(String id) {
@@ -31,7 +43,7 @@ public class CartService {
         for(CartModel cartItem:cartItems) {
             if(cartItem.getUserId().equals(id)) {
                 ProductModel product = productRepository.findByProductName(cartItem.getProductName()).get(0);
-                CartTempModel cartTemp = new CartTempModel(cartItem.getProductName(), cartItem.getQuantity(), cartItem.getPrice(), product.getImageUrl());
+                CartTempModel cartTemp = new CartTempModel(Long.toString(cartItem.getCartItemId()) ,cartItem.getProductName(), cartItem.getQuantity(), cartItem.getPrice(), product.getImageUrl());
                 cartItemsTemp.add(cartTemp);
             }
         }
@@ -39,8 +51,17 @@ public class CartService {
         return cartItemsTemp;
         
     }
-    public void deleteCartItem(String id) {
-        cartRepository.deleteById(Long.parseLong(id));
+    public Boolean deleteCartItem(String id) {
+        
+        try {
+            cartRepository.deleteById(Long.parseLong(id));
+        }
+        catch(Exception e) {
+            return false;
+        }
+
+        return true;
+
     }
     
 }

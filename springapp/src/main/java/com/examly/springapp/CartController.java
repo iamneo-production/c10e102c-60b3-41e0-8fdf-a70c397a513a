@@ -12,16 +12,16 @@ public class CartController {
 
     // Methods
     @RequestMapping(method=RequestMethod.POST, value="/home/{id}")
-    public void addToCart(@RequestBody UserQuantity uq, @PathVariable String id) {
-        cartService.addToCart(uq.getQuantity(), uq.getEmail(), id);
+    public Boolean addToCart(@RequestBody UserQuantity uq, @PathVariable String id) {
+        return cartService.addToCart(uq.getQuantity(), uq.getEmail(), id);
     }
     @RequestMapping(method=RequestMethod.GET, value="/cart/{id:.+}")
     public List<CartTempModel> showCart(@PathVariable String id) {
         return cartService.showCart(id);
     }
     @RequestMapping(method=RequestMethod.POST, value="/cart/delete")
-    public void deleteCartItem(@RequestBody String id) {
-        cartService.deleteCartItem(id);
+    public Boolean deleteCartItem(@RequestBody String id) {
+        return cartService.deleteCartItem(id);
     }
     
 }

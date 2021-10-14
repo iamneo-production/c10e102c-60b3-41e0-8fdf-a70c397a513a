@@ -32,16 +32,22 @@ public class OrderService {
         List<OrderTemp> ordersTemp = new ArrayList<>();
         for(OrderModel order:orders) {
             if((order.getUserId()).equals(id)) {
-                ProductModel product = productRepository.findByProductName(order.getProductName()).get(0);
-                OrderTemp orderTemp = new OrderTemp(order.getProductName(), order.getQuantity(), order.getTotalPrice(), order.getPrice(), product.getImageUrl());
-                ordersTemp.add(orderTemp);
+                try {
+                    ProductModel product = productRepository.findByProductName(order.getProductName()).get(0);
+                    OrderTemp orderTemp = new OrderTemp(order.getProductName(), order.getQuantity(), order.getTotalPrice(), order.getPrice(), product.getImageUrl());
+                    ordersTemp.add(orderTemp);
+                }
+                catch(Exception e) {
+                    OrderTemp orderTemp = new OrderTemp(order.getProductName(), order.getQuantity(), order.getTotalPrice(), order.getPrice(), "");
+                    ordersTemp.add(orderTemp);
+                }
             }
         }
 
         return ordersTemp;
 
     }
-    public void saveProduct(String id) {
+    public Boolean saveProduct(String id) {
 
         List<CartModel> cartItems = new ArrayList<>();
         cartRepository.findAll().forEach(cartItems::add);
@@ -49,21 +55,32 @@ public class OrderService {
         for(CartModel cartItem:cartItems) {
             if(cartItem.getUserId().equals(id)) {
                 OrderModel order = new OrderModel(id, cartItem.getProductName(), cartItem.getQuantity(), Integer.toString(cartItem.getQuantity()*Integer.parseInt(cartItem.getPrice())), "Success", cartItem.getPrice());
-                orderPlaced(order);
+                Boolean flag = orderPlaced(order);
             }
         }
 
         cartRepository.deleteAll();
+        return true;
 
     }
-    public void orderPlaced(OrderModel order) {
+    public Boolean orderPlaced(OrderModel order) {
 
-        orderRepository.save(order);
+        try {
+            ProductModel product = productRepository.findByProductName(order.getProductName()).get(0);
 
-        ProductModel product = productRepository.findByProductName(order.getProductName()).get(0);
-        product.setQuantity(Integer.toString(Integer.parseInt(product.getQuantity())-order.getQuantity()));
+            if(Integer.parseInt(product.getQuantity())<order.getQuantity()) {
+                return false;
+            }
 
-        productRepository.save(product);
+            product.setQuantity(Integer.toString(Integer.parseInt(product.getQuantity())-order.getQuantity()));
+            orderRepository.save(order);
+            productRepository.save(product);
+        }
+        catch(Exception e) {
+            return false;
+        }
+
+        return true;
 
     }
 
