@@ -27,6 +27,6 @@ public class UserQuantity {
         this.email = email;
     }
     public String getEmail() {
-        return email;
+        return this.email;
     }
 }

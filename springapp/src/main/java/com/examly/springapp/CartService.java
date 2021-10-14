@@ -1,3 +1,4 @@
+   
 package com.examly.springapp;
 
 import org.springframework.web.bind.annotation.*;
@@ -13,47 +14,55 @@ public class CartService {
     @Autowired
     private ProductRepository productRepository;
     @Autowired
-    private UserDao dao;
-
-    private static int cartItemId = 1;
+    private UserDao userRepository;
 
     // Methods
-    public UserModel addToCart(String quantity, String userId, String id) {
+    public Boolean addToCart(String quantity, String userId, String id) {
+        System.out.println(id);
+        try {
+            ProductModel product = productRepository.findByProductId(id).get(0);
+            if(Integer.parseInt(quantity)>Integer.parseInt(product.getQuantity()) || userRepository.findByEmail(userId).size()==0) {
+                return false;
+            }else{
+                CartModel cart = new CartModel(userId, product.getProductName(), Integer.parseInt(quantity), product.getPrice());
+                cartRepository.save(cart);
+            }
+        }
+        catch(Exception e) {
+            return false;
+        }
 
-        Optional<ProductModel> productOptional = productRepository.findById(id);
-        ProductModel product = productOptional.orElse(null);
-        UserModel user = dao.findById(userId).get();
-        CartModel cart = new CartModel(Integer.toString(cartItemId), user, product.getProductName(), Integer.parseInt(quantity), product.getPrice());
-        cartRepository.save(cart);
-
-        cartItemId++;
-        return user;
+        return true;
 
     }
-    public List<CartModel> show(){
-        List<CartModel> products = new ArrayList<>();
-        cartRepository.findAll().forEach(products::add);
-        return products;
-    }
-
     public List<CartTempModel> showCart(String id) {
 
-        List<CartModel> products = new ArrayList<>();
-        List<CartTempModel> products_temp = new ArrayList<>();
-        
-        cartRepository.findAll().forEach(products::add);
-        for(CartModel product:products) {
-            if((product.getUserId().getEmail()).equals(id)) {
-                CartTempModel temp = new CartTempModel(product.getProductName(), product.getQuantity(), product.getPrice());
-                products_temp.add(temp);
+        List<CartModel> cartItems = new ArrayList<>();
+        cartRepository.findAll().forEach(cartItems::add);
+        // return cartItems;
+        List<CartTempModel> cartItemsTemp = new ArrayList<>();
+        for(CartModel cartItem:cartItems) {
+            if(cartItem.getUserId().equals(id)) {
+                ProductModel product = productRepository.findByProductName(cartItem.getProductName()).get(0);
+                CartTempModel cartTemp = new CartTempModel(Long.toString(cartItem.getCartItemId()) ,cartItem.getProductName(), cartItem.getQuantity(), cartItem.getPrice(), product.getImageUrl());
+                cartItemsTemp.add(cartTemp);
             }
         }
 
-        return products_temp;
+        return cartItemsTemp;
         
     }
-    public void deleteCartItem(String id) {
-        cartRepository.deleteById(id);
+    public Boolean deleteCartItem(String id) {
+        
+        try {
+            cartRepository.deleteById(Long.parseLong(id));
+        }
+        catch(Exception e) {
+            return false;
+        }
+
+        return true;
+
     }
     
 }

@@ -66,7 +66,7 @@ class Products extends Component {
     const url = `https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/home/${e.target.parentElement.parentElement.id}`
     const addCart = {
       "quantity": "2",
-      "userId": localStorage.getItem("mail")
+      "email": localStorage.getItem("mail")
     }
     console.log(addCart);
     axios.post(url, addCart).then((res) => { console.log(res); });
