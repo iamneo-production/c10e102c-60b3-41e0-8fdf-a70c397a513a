@@ -9,11 +9,12 @@ class Home  extends Component{
     }
 
     render() {
+        const prop = this.props.prop;
         const Inner = this.props.inner;
         return (
             <div>
                 <Navbar {...this.props}/>
-                <Inner />
+                <Inner {...prop}/>
                 <Footer />
             </div>
         );

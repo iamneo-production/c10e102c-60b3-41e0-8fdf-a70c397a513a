@@ -93,7 +93,7 @@ class Products extends Component {
           {this.state.data.map((product, index) => {
             return (
               <ProductCard key={index} id={product.productId}>
-                <Link to={{pathname:`/product/${product.productId}}`, state: product}} replace>
+                <Link to={{pathname:`/product/${product.productId}}`, state: product}}>
                 <ProductImg src={product.imageUrl} alt={product.alt}  />
                 
                 </Link>

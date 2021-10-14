@@ -78,7 +78,7 @@ export const ProductButton = styled.button`
   border:none;
   background: #e31837;
   color: #fff;
-  margin: 7px 0px;
+  margin: 7px 2px;
   transition: 0.2 ease-out;
   
   &:hover {
