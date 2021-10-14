@@ -24,8 +24,18 @@
   }
 }
 
-.app{
 
+.app-product {
+  max-width: 1200px;
+  width: 100%;
+  background :#fff;
+  line-height: 2;
+  box-shadow: 0 0 10px #fdc500;
+  display: block;
+  margin: auto;
+}
+
+.app{
   width: 100%;
   line-height: 2;
   display: flex;
@@ -93,6 +103,9 @@
   display: flex;
   cursor: pointer;
   margin: 10px 0;
+}
+#product-btn{
+  margin-right: 15px;
 }
 .thumb img{
   width: 90px;

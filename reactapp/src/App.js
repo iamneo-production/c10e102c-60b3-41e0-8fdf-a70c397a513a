@@ -10,6 +10,7 @@ import Temp from './Temp/Temp';
 import PageNotFound from './PageNotFound/PageNotFound';
 import CartScreen from './cart/cartScreen';
 import OrderScreen from './order/orderScreen';
+import ProductScreen from './home/pages/ProductScreen'
 
 function App() {
   return (
@@ -34,6 +35,7 @@ const Routes = () => {
       <ProtectedLoginRoute exact auth={(localStorage.getItem("user") == null || localStorage.getItem("user") !== "true") && (localStorage.getItem("admin") == null || localStorage.getItem("admin") !== "true")} path="/login" component={Login} />
       <ProtectedLoginRoute exact path="/signup" auth={(localStorage.getItem("user") == null || localStorage.getItem("user") !== "true") && (localStorage.getItem("admin") == null || localStorage.getItem("admin") !== "true")} component={SignUp} />
       <ProtectedRoute exact auth={localStorage.getItem("user") != null && localStorage.getItem("user") === "true"} path="/home" component={Home} inner={About} />
+      <ProtectedRoute exact auth={localStorage.getItem("user") != null && localStorage.getItem("user") === "true"} path="/product/:id" component={Home} inner={ProductScreen}/>
       <ProtectedRoute exact auth={localStorage.getItem("user") != null && localStorage.getItem("user") === "true"} path="/cart" component={Home} inner={CartScreen}/>
       <ProtectedRoute exact auth={localStorage.getItem("user") != null && localStorage.getItem("user") === "true"} path="/orders" component={Home} inner={OrderScreen}/>
       <ProtectedRoute exact auth={localStorage.getItem("admin") != null && localStorage.getItem("admin") === "true"} path="/admin" component={Admin} inner={Temp}/>
@@ -52,7 +54,7 @@ const ProtectedLoginRoute = ({auth, component: Component, ...rest}) => {
 
 const ProtectedRoute = ({auth, component:Component, inner, ...rest}) => {
   return(
-    <Route {...rest} render={(props) => auth ? ( <Component {...props} inner={inner}/> ): (<Redirect to='/login' />) }/>
+    <Route {...rest} render={(props) => auth ? ( <Component {...props} inner={inner} prop={props}/> ): (<Redirect to='/login' />) }/>
   );
 }
 
