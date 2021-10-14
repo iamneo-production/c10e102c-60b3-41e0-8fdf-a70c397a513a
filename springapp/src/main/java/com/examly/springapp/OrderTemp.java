@@ -7,17 +7,19 @@ public class OrderTemp {
     private int quantity;
     private String totalPrice;
     private String Price;
+    private String imageUrl;
 
     // No Args Constructor
     public OrderTemp() {
     }
 
     // All Args Constructor
-    public OrderTemp(String ProductName, int quantity, String totalPrice, String Price) {
+    public OrderTemp(String ProductName, int quantity, String totalPrice, String Price, String imageUrl) {
         this.ProductName = ProductName;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
         this.Price = Price;
+        this.imageUrl = imageUrl;
     }
 
     // Setters and Getters
@@ -45,4 +47,11 @@ public class OrderTemp {
     public String getPrice() {
         return Price;
     }
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
 }

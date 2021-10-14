@@ -14,8 +14,6 @@ public class OrderService {
     private CartRepository cartRepository;
     @Autowired
     private ProductRepository productRepository;
-    @Autowired
-    private UserDao userDao;
 
     // Methods
     public List<OrderModel> getProducts() {
@@ -29,49 +27,42 @@ public class OrderService {
     public List<OrderTemp> getUserProducts(String id) {
 
         List<OrderModel> orders = new ArrayList<>();
-        List<OrderTemp> orders_temp = new ArrayList<>();
-        
         orderRepository.findAll().forEach(orders::add);
+
+        List<OrderTemp> ordersTemp = new ArrayList<>();
         for(OrderModel order:orders) {
             if((order.getUserId()).equals(id)) {
-                OrderTemp temp = new OrderTemp(order.getProductName(), order.getQuantity(), order.getTotalPrice(), order.getPrice());
-                orders_temp.add(temp);
+                ProductModel product = productRepository.findByProductName(order.getProductName()).get(0);
+                OrderTemp orderTemp = new OrderTemp(order.getProductName(), order.getQuantity(), order.getTotalPrice(), order.getPrice(), product.getImageUrl());
+                ordersTemp.add(orderTemp);
             }
         }
 
-        return orders_temp;
+        return ordersTemp;
 
     }
     public void saveProduct(String id) {
 
-        List<CartModel> products = new ArrayList<>();
-        cartRepository.findAll().forEach(products::add);
+        List<CartModel> cartItems = new ArrayList<>();
+        cartRepository.findAll().forEach(cartItems::add);
 
-        for(CartModel product:products) {
-            if((product.getUserId().getEmail()).equals(id)) {
-                long orderId = Integer.parseInt(product.getUserId().getMobileNumber())*10 + Integer.parseInt(product.getCartItemId());
-                OrderModel order = new OrderModel(Long.toString(orderId), id, product.getProductName(), product.getQuantity(), Integer.toString(product.getQuantity()*Integer.parseInt(product.getPrice())), "Success", product.getPrice());
+        for(CartModel cartItem:cartItems) {
+            if(cartItem.getUserId().equals(id)) {
+                OrderModel order = new OrderModel(id, cartItem.getProductName(), cartItem.getQuantity(), Integer.toString(cartItem.getQuantity()*Integer.parseInt(cartItem.getPrice())), "Success", cartItem.getPrice());
                 orderPlaced(order);
             }
         }
 
-        CartService ob = new CartService();
-        for(CartModel product:products) {
-            if((product.getUserId()).equals(id)) {
-                ob.deleteCartItem(product.getCartItemId());
-            }
-        }
+        cartRepository.deleteAll();
 
     }
     public void orderPlaced(OrderModel order) {
 
         orderRepository.save(order);
 
-        Optional<ProductModel> productOptional = productRepository.findById(order.getProductName());
-        ProductModel product = productOptional.orElse(null);
+        ProductModel product = productRepository.findByProductName(order.getProductName()).get(0);
         product.setQuantity(Integer.toString(Integer.parseInt(product.getQuantity())-order.getQuantity()));
 
-        productRepository.deleteById(product.getProductName());
         productRepository.save(product);
 
     }

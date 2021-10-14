@@ -9,9 +9,9 @@ public class CartModel {
     
     // Class Variables
     @Id
-    private String cartItemId;
-    @Transient
-    private UserModel userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long cartItemId;
+    private String userId;
     private String ProductName;
     private int Quantity;
     private String Price;
@@ -21,8 +21,7 @@ public class CartModel {
     }
 
     // All Args Constructor
-    public CartModel(String cartItemId, UserModel userId, String ProductName, int Quantity, String Price) {
-        this.cartItemId = cartItemId;
+    public CartModel(String userId, String ProductName, int Quantity, String Price) {
         this.userId = userId;
         this.ProductName = ProductName;
         this.Quantity = Quantity;
@@ -30,16 +29,16 @@ public class CartModel {
     }
 
     // Setters and Getters
-    public void setCartItemId(String cartItemId) {
+    public void setCartItemId(Long cartItemId) {
         this.cartItemId = cartItemId;
     }
-    public String getCartItemId() {
+    public Long getCartItemId() {
         return cartItemId;
     }
-    public void setUserId(UserModel userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
-    public UserModel getUserId() {
+    public String getUserId() {
         return userId;
     }
     public void setProductName(String ProductName) {

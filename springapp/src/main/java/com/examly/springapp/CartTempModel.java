@@ -6,16 +6,18 @@ public class CartTempModel {
     private String ProductName;
     private int Quantity;
     private String Price;
+    private String imageUrl;
 
     // No Args Constructor
     public CartTempModel() {
     }
 
     // All Args Constructor
-    public CartTempModel(String ProductName, int Quantity, String Price) {
+    public CartTempModel(String ProductName, int Quantity, String Price, String imageUrl) {
         this.ProductName = ProductName;
         this.Quantity = Quantity;
         this.Price = Price;
+        this.imageUrl = imageUrl;
     }
 
     // Setters and Getters
@@ -37,4 +39,11 @@ public class CartTempModel {
     public String getPrice() {
         return Price;
     }
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+    public String getImageUrl() {
+        return imageUrl;
+    }
+    
 }

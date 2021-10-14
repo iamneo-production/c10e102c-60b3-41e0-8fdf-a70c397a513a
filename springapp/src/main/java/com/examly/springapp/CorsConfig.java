@@ -1,4 +1,4 @@
-package com.examly.springapp;
+/*package com.examly.springapp;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,4 +17,4 @@ public class CorsConfig {
         };
     }
 
-}
+}*/

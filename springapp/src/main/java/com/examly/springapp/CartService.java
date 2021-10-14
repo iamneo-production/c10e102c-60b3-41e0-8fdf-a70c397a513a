@@ -12,38 +12,35 @@ public class CartService {
     private CartRepository cartRepository;
     @Autowired
     private ProductRepository productRepository;
-    private static int cartItemId = 1;
 
     // Methods
-    public void addToCart(String quantity, UserModel userId, String id) {
+    public void addToCart(String quantity, String userId, String id) {
 
-        Optional<ProductModel> productOptional = productRepository.findById(id);
-        ProductModel product = productOptional.orElse(null);
+        ProductModel product = productRepository.findByProductId(id).get(0);
 
-        CartModel cart = new CartModel(Integer.toString(cartItemId), userId, product.getProductName(), Integer.parseInt(quantity), product.getPrice());
+        CartModel cart = new CartModel(userId, product.getProductName(), Integer.parseInt(quantity), product.getPrice());
         cartRepository.save(cart);
-
-        cartItemId++;
 
     }
     public List<CartTempModel> showCart(String id) {
 
-        List<CartModel> products = new ArrayList<>();
-        List<CartTempModel> products_temp = new ArrayList<>();
-        
-        cartRepository.findAll().forEach(products::add);
-        for(CartModel product:products) {
-            if((product.getUserId().getEmail()).equals(id)) {
-                CartTempModel temp = new CartTempModel(product.getProductName(), product.getQuantity(), product.getPrice());
-                products_temp.add(temp);
+        List<CartModel> cartItems = new ArrayList<>();
+        cartRepository.findAll().forEach(cartItems::add);
+
+        List<CartTempModel> cartItemsTemp = new ArrayList<>();
+        for(CartModel cartItem:cartItems) {
+            if(cartItem.getUserId().equals(id)) {
+                ProductModel product = productRepository.findByProductName(cartItem.getProductName()).get(0);
+                CartTempModel cartTemp = new CartTempModel(cartItem.getProductName(), cartItem.getQuantity(), cartItem.getPrice(), product.getImageUrl());
+                cartItemsTemp.add(cartTemp);
             }
         }
 
-        return products_temp;
+        return cartItemsTemp;
         
     }
     public void deleteCartItem(String id) {
-        cartRepository.deleteById(id);
+        cartRepository.deleteById(Long.parseLong(id));
     }
     
 }

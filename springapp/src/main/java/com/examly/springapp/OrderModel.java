@@ -9,7 +9,8 @@ public class OrderModel {
     
     // Class Variables
     @Id
-    private String orderId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long orderId;
     private String userId;
     private String ProductName;
     private int quantity;
@@ -22,8 +23,7 @@ public class OrderModel {
     }
 
     // All Args Constructor
-    public OrderModel(String orderId, String userId, String ProductName, int quantity, String totalPrice, String Status, String Price) {
-        this.orderId = orderId;
+    public OrderModel(String userId, String ProductName, int quantity, String totalPrice, String Status, String Price) {
         this.userId = userId;
         this.ProductName = ProductName;
         this.quantity = quantity;
@@ -33,10 +33,10 @@ public class OrderModel {
     }
 
     // Setters and Getters
-    public void setOrderId(String orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
-    public String getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
     public void setUserId(String userId) {

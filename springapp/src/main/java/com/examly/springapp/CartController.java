@@ -12,10 +12,10 @@ public class CartController {
 
     // Methods
     @RequestMapping(method=RequestMethod.POST, value="/home/{id}")
-    public void addToCart(@RequestBody String quantity, @RequestBody UserModel userId, @PathVariable String id) {
-        cartService.addToCart(quantity, userId, id);
+    public void addToCart(@RequestBody UserQuantity uq, @PathVariable String id) {
+        cartService.addToCart(uq.getQuantity(), uq.getEmail(), id);
     }
-    @RequestMapping(method=RequestMethod.GET, value="/cart/{id}")
+    @RequestMapping(method=RequestMethod.GET, value="/cart/{id:.+}")
     public List<CartTempModel> showCart(@PathVariable String id) {
         return cartService.showCart(id);
     }
