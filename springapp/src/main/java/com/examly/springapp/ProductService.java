@@ -9,38 +9,93 @@ public class ProductService {
     
     @Autowired
     private ProductRepository productRepository;
-
-    List<ProductModel> getProduct()
+    @Autowired
+    private CartRepository cartRepository;
+    
+    public List<ProductModel> getProduct()
     {
         List<ProductModel> products=new ArrayList<>();
         productRepository.findAll().forEach(products::add);
         return products;
     }
 
-    List<ProductModel> getHomeProduct()
+    public List<ProductModel> getHomeProduct()
     {
         List<ProductModel> productsHome=new ArrayList<>();
         productRepository.findAll().forEach(productsHome::add);
         return productsHome;
     }
 
-    ProductModel productEditData(String id)
+    public ProductModel productEditData(String id)
     {
-        return productRepository.findByProductId(id).get(0);
+        try{
+            return productRepository.findByProductId(id).get(0);
+        }
+        catch(Exception e)
+        {
+            return new ProductModel();
+        }
     }
 
-    void productEditSave(ProductModel data)
+    public Boolean productEditSave(ProductModel data)
     {
-        productRepository.save(data);
+        try{
+            productRepository.save(data);
+            List<CartModel> cartItems = new ArrayList<>();
+            cartRepository.findAll().forEach(cartItems::add);
+            
+            for(CartModel cartItem:cartItems) 
+            {
+                if(cartItem.getProductName().equals(data.getProductName())) 
+                {
+                    cartItem.setPrice(data.getPrice());
+                }
+                cartRepository.save(cartItem);
+            }
+        }
+        catch(Exception e)
+        {
+            return false;
+        }
+        return true;
     }
 
-    void productSave(ProductModel data)
+    public Boolean productSave(ProductModel data)
     {
-        productRepository.save(data);
+        try
+        {
+            if(productRepository.findByProductId(data.getProductId()).size()!=0)
+            {
+                return false;
+            }
+            productRepository.save(data);
+        }
+        catch(Exception e)
+        {
+            return false;
+        }
+        return true;
     }
-    void productDelete(String id)
+    public Boolean productDelete(String id)
     {
-        ProductModel product = productRepository.findByProductId(id).get(0);
-        productRepository.deleteById(product.getProductName());
+        try
+        {
+            ProductModel product = productRepository.findByProductId(id).get(0);
+            productRepository.deleteById(product.getProductName());
+            List<CartModel> cartItems = new ArrayList<>();
+            cartRepository.findAll().forEach(cartItems::add);
+            for(CartModel cartItem:cartItems) 
+            {
+                if(cartItem.getProductName().equals(product.getProductName()))
+                {
+                    cartRepository.deleteById(cartItem.getCartItemId());
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            return false;
+        }
+        return true;
     }
 }
