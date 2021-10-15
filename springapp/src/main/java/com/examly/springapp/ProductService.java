@@ -39,41 +39,31 @@ public class ProductService {
 
     public Boolean productEditSave(ProductModel data)
     {
-        try{
-            productRepository.save(data);
-            List<CartModel> cartItems = new ArrayList<>();
-            cartRepository.findAll().forEach(cartItems::add);
-            
-            for(CartModel cartItem:cartItems) 
-            {
-                if(cartItem.getProductName().equals(data.getProductName())) 
-                {
-                    cartItem.setPrice(data.getPrice());
-                }
-                cartRepository.save(cartItem);
-            }
-        }
-        catch(Exception e)
+        if(productRepository.findByProductName(data.getProductName()).size()==1)
         {
-            return false;
+        	productRepository.save(data);
+        }
+
+        List<CartModel> cartItems = new ArrayList<>();
+        cartRepository.findAll().forEach(cartItems::add);
+        for(CartModel cartItem:cartItems) 
+        {
+            if(cartItem.getProductName().equals(data.getProductName())) 
+            {
+                cartItem.setPrice(data.getPrice());
+            }
+            cartRepository.save(cartItem);
         }
         return true;
     }
 
     public Boolean productSave(ProductModel data)
     {
-        try
-        {
-            if(productRepository.findByProductId(data.getProductId()).size()!=0)
-            {
-                return false;
-            }
-            productRepository.save(data);
-        }
-        catch(Exception e)
+        if(productRepository.findByProductName(data.getProductName()).size()!=0)
         {
             return false;
         }
+        productRepository.save(data);
         return true;
     }
     public Boolean productDelete(String id)
