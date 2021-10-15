@@ -106,3 +106,12 @@ export const PrtButton = styled.button`
     color: #000;
   }
 `;
+
+export const QuantityContainer = styled.div`
+  display: flex;
+  height: 20px;
+  width: 90px;
+  margin: 15px 0px;
+  justify-content: space-evenly;
+  align-items: center;
+`;

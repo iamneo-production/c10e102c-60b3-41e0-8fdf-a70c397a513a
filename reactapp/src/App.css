@@ -150,3 +150,46 @@
   max-width: 10rem;
   max-height: 10rem;
 }
+
+.text-box{
+  background-color: #fff;
+  width: 30px;
+  color: #111;
+  border-radius: 5px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.product-text-box {
+  border: 1px solid #111;
+}
+.control {
+  background-color: transparent;
+  color: #fff;
+  border: none;
+}
+.control:hover{
+  color: #ffc500;
+}
+
+.control-product {
+  background-color: transparent;
+  border: none;
+}
+.control-product:hover{
+  color: #ffc500;
+}
+
+.info {
+  display: none;
+  width: 200px;
+  padding: 20px 5px;
+  text-align: center;
+  font-size: 20px;
+  position: fixed;
+  right: 50px;
+  top: -1000px;
+  box-shadow: 2px 2px 3px #fff;
+  z-index: 10000;
+  transition: top 5000ms ease-in-out;
+}

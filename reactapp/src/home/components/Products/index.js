@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import './Products.css';
 import axios from 'axios';
-
 import {
   ProductsContainer,
   ProductWrapper,
@@ -13,7 +12,8 @@ import {
   ProductInfo,
   ProductDesc,
   ProductPrice,
-  ProductButton
+  ProductButton,
+  QuantityContainer
 } from './ProductsElements';
 
 class Products extends Component {
@@ -65,16 +65,45 @@ class Products extends Component {
   addToCart = (e) => {
     const url = `https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/home/${e.target.parentElement.parentElement.id}`
     const addCart = {
-      "quantity": "2",
+      "quantity": document.querySelector(`.p${e.target.parentElement.parentElement.id}`).innerHTML,
       "email": localStorage.getItem("mail")
     }
     console.log(addCart);
-    axios.post(url, addCart).then((res) => { console.log(res); });
+    axios.post(url, addCart).then((res) => { 
+      if(res.data){
+        document.querySelector(".info").style.display = "block";
+        document.querySelector(".info").style.top = "50px";
+      }
+      setTimeout(function() {
+        document.querySelector(".info").style.display = "none";
+        document.querySelector(".info").style.top = "-1000px";
+      }, 2500);
+    });
+  }
+
+  placeOrder = () => {
+    
+  }
+
+  increaseQuantity = (e) => {
+    // console.log(document.querySelector(`.p${e.target.parentElement.parentElement.parentElement.parentElement.id}`))
+    var val = document.querySelector(`.p${e.target.parentElement.parentElement.parentElement.parentElement.id}`);
+    val.innerHTML = parseInt(val.innerHTML) + 1;
+  }
+
+  decreaseQuantity = (e) => {
+    console.log(document.querySelector(`.p${e.target.parentElement.parentElement.parentElement.parentElement.id}`))
+    var val = document.querySelector(`.p${e.target.parentElement.parentElement.parentElement.parentElement.id}`);
+    if(val.innerHTML !== "1")
+      val.innerHTML = parseInt(val.innerHTML) - 1;
   }
  
   render() {
     return (
       <ProductsContainer>
+        <div className="info has-background-success">
+          <h1><i className="far fa-check-circle" style={{"margin-right":"10px", "font-size": "22px"}}></i>Added To Cart</h1>
+        </div>
         <ProductsHeading>{this.heading}</ProductsHeading>
         <div className="content-home">
           <div className="control has-icons-left">
@@ -100,9 +129,14 @@ class Products extends Component {
                 <ProductInfo>
                   <ProductTitle>{product.productName}</ProductTitle>
                   <ProductDesc>{product.description}</ProductDesc>
-                  <ProductPrice>Rs. {product.price}</ProductPrice>                
+                  <ProductPrice>Rs. {product.price}</ProductPrice>
+                  <QuantityContainer>
+                    <button className="control" onClick={this.decreaseQuantity}><i className="fas fa-minus"></i></button> 
+                    <div className={`text-box p${product.productId}`}>1</div>
+                    <button className="control" onClick={this.increaseQuantity}><i className="fas fa-plus"></i></button>
+                  </QuantityContainer>
                   <ProductButton onClick={this.addToCart}>Add to Cart</ProductButton>
-                  <ProductButton>Buy Now</ProductButton>
+                  <ProductButton onClick={this.placeOrder}>Buy Now</ProductButton>
                   
                 </ProductInfo>
                 

@@ -1,10 +1,12 @@
 import React from 'react'
 import '../../../../reactapp/src/';
 import {
-ProductsContainer,
-  ProductButton
+    ProductsContainer,
+    ProductButton,
+    QuantityContainer
 } from '../components/Products/ProductsElements';
 import DetailsThumb from '../components/Products/DetailsThumb';
+import axios from 'axios';
 
 export default class ProductScreen extends React.Component{
 
@@ -15,15 +17,43 @@ export default class ProductScreen extends React.Component{
         }
     }
 
-    alertMessage(){
-       console.log(this.props.location.state.id); 
-    } 
+    addToCart = (e) => {
+        const url = `https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/home/${this.state.value.productId}`
+        const addCart = {
+          "quantity": document.querySelector(".quantity").innerHTML,
+          "email": localStorage.getItem("mail")
+        }
+        console.log(addCart);
+        axios.post(url, addCart).then((res) => { 
+            if(res.data){
+                document.querySelector(".info").style.display = "block";
+                document.querySelector(".info").style.top = "50px";
+            }
+            setTimeout(function() {
+                document.querySelector(".info").style.display = "none";
+                document.querySelector(".info").style.top = "-1000px";
+            }, 2500);
+        });
+      }
+
+    increaseQuantity = (e) => {
+        var val = document.querySelector(".quantity");
+        val.innerHTML = parseInt(val.innerHTML) + 1;
+      }
     
+    decreaseQuantity = (e) => {
+    var val = document.querySelector(".quantity");
+    if(val.innerHTML !== "1")
+        val.innerHTML = parseInt(val.innerHTML) - 1;
+    }
 
     render(){
         return (
         <ProductsContainer>
             <div className="app-product">
+                <div className="info has-background-success">
+                    <h1><i className="far fa-check-circle" style={{"margin-right":"10px", "font-size": "22px"}}></i>Added To Cart</h1>
+                </div>
                 {
                 
                     <div className="details" key={this.state.value.productId}>
@@ -42,7 +72,12 @@ export default class ProductScreen extends React.Component{
                         <p>{this.state.value.description}</p>                        
 
                         <DetailsThumb images={[this.state.value.imageUrl]} tab={this.handleTab} myRef={this.myRef}  />
-                        <ProductButton id="product-btn">Add To Cart</ProductButton>
+                        <QuantityContainer>
+                            <button className="control-product" onClick={this.decreaseQuantity}><i className="fas fa-minus"></i></button> 
+                            <div className="quantity text-box product-text-box">1</div>
+                            <button className="control-product" onClick={this.increaseQuantity}><i className="fas fa-plus"></i></button>
+                        </QuantityContainer>
+                        <ProductButton id="product-btn" onClick={this.addToCart}>Add To Cart</ProductButton>
                         <ProductButton>Buy Now</ProductButton>
                     
                     </div>
