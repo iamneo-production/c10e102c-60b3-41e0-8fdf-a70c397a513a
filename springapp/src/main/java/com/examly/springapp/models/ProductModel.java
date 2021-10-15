@@ -1,4 +1,4 @@
-package com.example.model;
+package com.examly.springapp;
 
 import java.util.*;
 import javax.persistence.*;
