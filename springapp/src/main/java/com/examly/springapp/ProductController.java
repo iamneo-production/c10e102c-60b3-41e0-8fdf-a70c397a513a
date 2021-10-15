@@ -10,38 +10,38 @@ public class ProductController {
     private ProductService productService;
 
     @RequestMapping("/admin")
-    List<ProductModel> getProduct()
+    public List<ProductModel> getProduct()
     {
         return productService.getProduct();
     }
     
     @RequestMapping("/home")
-    List<ProductModel> getHomeProduct()
+    public List<ProductModel> getHomeProduct()
     {
         return productService.getHomeProduct();
     }
 
     @RequestMapping("/admin/productEdit/{id}")
-    ProductModel productEditData(@PathVariable String id)
+    public ProductModel productEditData(@PathVariable String id)
     {
         return productService.productEditData(id);
     }
 
     @RequestMapping(method=RequestMethod.POST,value="/admin/productEdit/{id}")
-    void productEditSave(@RequestBody ProductModel data)
+    public Boolean productEditSave(@RequestBody ProductModel data)
     {
-        productService.productEditSave(data);
+        return productService.productEditSave(data);
     }
 
     @RequestMapping(method=RequestMethod.POST,value="/admin/addProduct")
-    void productSave(@RequestBody ProductModel data)
+    public Boolean productSave(@RequestBody ProductModel data)
     {
-        productService.productSave(data);
+        return productService.productSave(data);
     }
 
     @RequestMapping("/admin/delete/{id}")
-    void productDelete(@PathVariable String id)
+    public Boolean productDelete(@PathVariable String id)
     {
-        productService.productDelete(id);
+        return productService.productDelete(id);
     }
 }
