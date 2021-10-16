@@ -15,7 +15,10 @@ class CartScreen extends Component {
     this.state={
       value: []
     }
-    this.getCart();
+  }
+
+  SAFE_componentWillMount() {
+    this.getCart = this.getCart.bind(this);
   }
 
   getCart = () => {
@@ -25,16 +28,22 @@ class CartScreen extends Component {
   }
  
   deleteCartItem = (e) => {
-    console.log(e.target.classList[e.target.classList.length - 1]);
     var url = "https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/cart/delete";
     axios.post(url, `${e.target.classList[e.target.classList.length - 1]}`).then((res) => {
-      console.log(res, `${e.target.classList[e.target.classList.length - 1]}`);
       if(res.data){
         this.getCart();
       }
     })
   }
+
+  placeOrder = () => {
+    axios.post("https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/saveOrder", {"id": localStorage.getItem("mail")}).then((res) => {
+      console.log(res.data);
+    })
+  }
+
   render() {
+    this.getCart();
     return (
       <ProductsContainer>
       <div className="app">
@@ -53,20 +62,22 @@ class CartScreen extends Component {
               <tbody>
               {
                 this.state.value.length === 0 ?
-                  <td>
-                    Cart is empty
-                  </td>
+                  <tr>
+                    <td>
+                      Cart is empty
+                    </td>
+                  </tr>
                   :
                   this.state.value.map(item =>
-                    <tr>
+                    <tr key={item.cartItemId}>
                       <td className="image-td">
                         <img className="image" src={item.imageUrl} alt="product" />              
                       </td>
                       <td>
-                          {item.productName}
+                        {item.productName}
                       </td>
                       <td>
-                        ${item.price}
+                        Rs. {item.price}
                       </td>
                       <td>
                         {item.quantity}
@@ -82,23 +93,25 @@ class CartScreen extends Component {
               {
                 this.state.value.length === 0 ?
                   <tr style={{display:'flex', alignItems: 'center'}}>
-                    <Link to='/'>
-                    <>
-                    <PrtButton  >
-                      Go For Shopping
-                    </PrtButton></></Link>
+                    <td>
+                      <Link to='/'>
+                      <>
+                      <PrtButton  >
+                        Go For Shopping
+                      </PrtButton></></Link>
+                    </td>
                   </tr>:
               <tr className="cart-action" disabled={this.state.value.length === 0} style={{display:'flex', justifyContent: 'center'}}>
                 <td>
                   <h3>
                           Subtotal ({
                   this.state.value.reduce((a, c) => a + parseInt(c.quantity),0)
-                  } Items):
+                  } Items):Rs.
                     
-                  {this.state.value.reduce((a, c) => a + parseInt(c.price) * parseInt(c.quantity),0)} ₹
+                  {this.state.value.reduce((a, c) => a + parseInt(c.price) * parseInt(c.quantity),0)} 
                   </h3>
                   <div>
-                  <PrtButton className="button primary full-width" >
+                  <PrtButton className="button primary full-width" onClick={this.placeOrder}>
                     Proceed to Checkout
                   </PrtButton>
                   </div>

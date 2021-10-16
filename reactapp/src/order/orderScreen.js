@@ -1,75 +1,99 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { myorderItems} from './data';
 import {
- 
   ProductsContainer,
   PrtButton
 } from '../home/components/Products/ProductsElements';
+import axios from 'axios';
 
 
 
-export default function OrderScreen() {
-  return (<ProductsContainer>
-    <div className="app">
-      <div className="cart">
-        <div className="cart-list">
-        <table className="table is-hoverable cart-table">
-          <thead>
-            <tr className="has-background-warning">
-              <td className="image-td">Shopping Cart</td>
-              <td>Product Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Total Price</td>
-            </tr>
-          </thead>
-          <tbody>
-          {
-            myorderItems.length === 0 ?
-              <td>
-                Cart is empty
-              </td>
-              :
-              myorderItems.map(item =>
-                <tr>
-                  <td className="image-td">
-                    <img className="image" src={item.img} alt="product" />              
-                  </td>
-                  <td>
-                      {item.productName}
-                  </td>
-                  <td>
-                    ${item.price}
-                  </td>
-                  <td>
-                    {item.quanity}
-                  </td>
-                  <td> 
-                    {myorderItems.reduce((a, c) => a + parseInt(c.price) * parseInt(c.quanity),0)} ₹
-                  </td>
+class OrderScreen extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      value: []
+    }
+  }
+
+  getOrders = () => {
+    axios.post("https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/orders", {"id" : localStorage.getItem("mail")}).then((res) => {
+      this.setState({value: res.data});
+    })
+  }
+
+  render(){
+    this.getOrders();
+    return (
+      <ProductsContainer>
+        <div className="app">
+          <div className="cart">
+            <div className="cart-list">
+            <table className="table is-hoverable cart-table">
+              <thead>
+                <tr className="has-background-warning">
+                  <td className="image-td">Shopping Cart</td>
+                  <td>Product Name</td>
+                  <td>Price</td>
+                  <td>Quantity</td>
+                  <td>Total Price</td>
                 </tr>
-              )
-          }
-          {
-            myorderItems.length === 0 ?
-            <tr>
-              <Link to='/'>
-               <>
-                <PrtButton  >
-                  Go For Shopping
-                </PrtButton></></Link>
-                <>
-              </>
-            </tr>:
-            <tr>
-              
-            </tr>
-          }
-          </tbody>
-        </table>
+              </thead>
+              <tbody>
+              {
+                this.state.value.length === 0 ?
+                  <tr>
+                    <td>
+                      No Orders
+                    </td>
+                  </tr>
+                  :
+                  this.state.value.map(item =>
+                    <tr key={item.orderId}>
+                      <td className="image-td">
+                        <img className="image" src={item.imageUrl} alt="product" />              
+                      </td>
+                      <td>
+                          {item.productName}
+                      </td>
+                      <td>
+                        Rs. {item.price}
+                      </td>
+                      <td>
+                        {item.quantity}
+                      </td>
+                      <td> 
+                        Rs. {item.totalPrice}
+                      </td>
+                    </tr>
+                  )
+              }
+              {
+                this.state.value.length === 0 ?
+                <tr>
+                  <td>
+                    <Link to='/'>
+                    <>
+                      <PrtButton  >
+                        Go For Shopping
+                      </PrtButton></></Link>
+                      <>
+                    </>
+                  </td>
+                </tr>:
+                <tr>
+                  
+                </tr>
+              }
+              </tbody>
+            </table>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </ProductsContainer>
-)}
+      </ProductsContainer>
+    )
+  }
+}
+
+export default OrderScreen;

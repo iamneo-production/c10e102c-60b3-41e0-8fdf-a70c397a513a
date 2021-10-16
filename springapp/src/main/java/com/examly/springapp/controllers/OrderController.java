@@ -16,12 +16,12 @@ public class OrderController {
         return orderService.getProducts();
     }
     @RequestMapping(method=RequestMethod.POST, value="/orders")
-    public List<OrderTemp> getUserProducts(@RequestBody String id) {
-        return orderService.getUserProducts(id);
+    public List<OrderTemp> getUserProducts(@RequestBody IdModel id) {
+        return orderService.getUserProducts(id.getId());
     }
     @RequestMapping(method=RequestMethod.POST, value="/saveOrder")
-    public Boolean saveProduct(@RequestBody String id) {
-        return orderService.saveProduct(id);
+    public Boolean saveProduct(@RequestBody IdModel id) {
+        return orderService.saveProduct(id.getId());
     }
     @RequestMapping(method=RequestMethod.POST, value="/placeOrders")
     public Boolean orderPlaced(@RequestBody OrderModel order) {

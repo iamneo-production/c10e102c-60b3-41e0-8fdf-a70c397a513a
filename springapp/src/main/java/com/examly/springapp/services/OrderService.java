@@ -48,19 +48,22 @@ public class OrderService {
 
     }
     public Boolean saveProduct(String id) {
-
+        System.out.println(id);
         List<CartModel> cartItems = new ArrayList<>();
         cartRepository.findAll().forEach(cartItems::add);
+        Boolean flag = false;
 
         for(CartModel cartItem:cartItems) {
             if(cartItem.getUserId().equals(id)) {
                 OrderModel order = new OrderModel(id, cartItem.getProductName(), cartItem.getQuantity(), Integer.toString(cartItem.getQuantity()*Integer.parseInt(cartItem.getPrice())), "Success", cartItem.getPrice());
-                Boolean flag = orderPlaced(order);
+                flag = orderPlaced(order);
             }
         }
-
-        cartRepository.deleteAll();
-        return true;
+        if(flag){
+            cartRepository.deleteAll();
+            return true;
+        }
+        return false;
 
     }
     public Boolean orderPlaced(OrderModel order) {
@@ -68,7 +71,8 @@ public class OrderService {
         try {
             ProductModel product = productRepository.findByProductName(order.getProductName()).get(0);
 
-            if(Integer.parseInt(product.getQuantity())<order.getQuantity()) {
+            if(Integer.parseInt(product.getQuantity()) < order.getQuantity()) {
+                System.out.println("quantity");
                 return false;
             }
 
@@ -77,6 +81,7 @@ public class OrderService {
             productRepository.save(product);
         }
         catch(Exception e) {
+            System.out.println(e);
             return false;
         }
 

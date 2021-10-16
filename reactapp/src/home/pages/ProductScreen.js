@@ -34,7 +34,21 @@ export default class ProductScreen extends React.Component{
                 document.querySelector(".info").style.top = "-1000px";
             }, 2500);
         });
-      }
+    }
+
+    placeOrder = (e) => {
+        const order = {
+          "userId": localStorage.getItem("mail"),
+          "productName": this.state.value.productName,
+          "quantity": document.querySelector(".quantity").innerHTML,
+          "totalPrice": parseInt(this.state.value.price) * parseInt(document.querySelector(".quantity").innerHTML),
+          "Status": "Success",
+          "Price": this.state.value.price
+        }
+        axios.post("https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/placeOrders", order).then((res) => {
+          console.log(res);
+        })
+    }
 
     increaseQuantity = (e) => {
         var val = document.querySelector(".quantity");
@@ -78,7 +92,7 @@ export default class ProductScreen extends React.Component{
                             <button className="control-product" onClick={this.increaseQuantity}><i className="fas fa-plus"></i></button>
                         </QuantityContainer>
                         <ProductButton id="product-btn" onClick={this.addToCart}>Add To Cart</ProductButton>
-                        <ProductButton>Buy Now</ProductButton>
+                        <ProductButton onClick={this.placeOrder}>Buy Now</ProductButton>
                     
                     </div>
                     

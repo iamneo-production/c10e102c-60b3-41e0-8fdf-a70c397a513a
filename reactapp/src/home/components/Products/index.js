@@ -21,15 +21,15 @@ class Products extends Component {
   constructor({ heading }){
     super();
     this.heading = heading;
-    // this.data = data;
-    this.getProducts();
-    this.getProducts = this.getProducts.bind(this);
     this.state = {
       sort: "asc",
       data: []
     };
   }
 
+  SAFE_componentWillMount() {
+    this.getProducts = this.getProducts.bind(this);
+  }
 
   sortData = () => {
     if(this.state.sort === 'asc'){
@@ -81,28 +81,44 @@ class Products extends Component {
     });
   }
 
-  placeOrder = () => {
-    
+  placeOrder = (e) => {
+    console.log(this.state.data, e.target.parentElement.parentElement.id);
+    for(var i = 0; i < this.state.data.length; i++){
+      if(this.state.data[i].productId === `${e.target.parentElement.parentElement.id}`){
+        var temp = this.state.data[i];
+        break;
+      }
+    }
+    const order = {
+      "userId": localStorage.getItem("mail"),
+      "productName": temp.productName,
+      "quantity": document.querySelector(`.p${e.target.parentElement.parentElement.id}`).innerHTML,
+      "totalPrice": parseInt(temp.price) * parseInt(document.querySelector(`.p${e.target.parentElement.parentElement.id}`).innerHTML),
+      "Status": "Success",
+      "Price": temp.price
+    }
+    axios.post("https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/placeOrders", order).then((res) => {
+      console.log(res);
+    })
   }
 
   increaseQuantity = (e) => {
-    // console.log(document.querySelector(`.p${e.target.parentElement.parentElement.parentElement.parentElement.id}`))
     var val = document.querySelector(`.p${e.target.parentElement.parentElement.parentElement.parentElement.id}`);
     val.innerHTML = parseInt(val.innerHTML) + 1;
   }
 
   decreaseQuantity = (e) => {
-    console.log(document.querySelector(`.p${e.target.parentElement.parentElement.parentElement.parentElement.id}`))
     var val = document.querySelector(`.p${e.target.parentElement.parentElement.parentElement.parentElement.id}`);
     if(val.innerHTML !== "1")
       val.innerHTML = parseInt(val.innerHTML) - 1;
   }
  
   render() {
+    this.getProducts();
     return (
       <ProductsContainer>
         <div className="info has-background-success">
-          <h1><i className="far fa-check-circle" style={{"margin-right":"10px", "font-size": "22px"}}></i>Added To Cart</h1>
+          <h1><i className="far fa-check-circle" style={{"marginRight":"10px", "fontSize": "22px"}}></i>Added To Cart</h1>
         </div>
         <ProductsHeading>{this.heading}</ProductsHeading>
         <div className="content-home">
@@ -136,7 +152,7 @@ class Products extends Component {
                     <button className="control" onClick={this.increaseQuantity}><i className="fas fa-plus"></i></button>
                   </QuantityContainer>
                   <ProductButton onClick={this.addToCart}>Add to Cart</ProductButton>
-                  <ProductButton onClick={this.placeOrder}>Buy Now</ProductButton>
+                  <ProductButton onClick={this.placeOrder} >Buy Now</ProductButton>
                   
                 </ProductInfo>
                 
