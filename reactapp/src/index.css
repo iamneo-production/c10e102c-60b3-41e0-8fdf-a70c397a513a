@@ -1,0 +1,141 @@
+body
+{
+	background-image:url('https://media.istockphoto.com/vectors/abstract-red-and-yellow-background-vector-id1173373272?k=20&m=1173373272&s=612x612&w=0&h=CzyVtj59dsg-cHByv7XbZROmIwf7Tfkj3eUzhsOuVdI=');
+	background-repeat:no-repeat;
+	background-size:cover;
+	height:100%;
+	overflow:hidden;
+
+}
+th,td{
+	padding:8px;
+	text-align:left;
+	border-bottom:1px solid black;
+}
+#addDressBody
+{
+    border: 3px solid #ffff00;
+  text-align: center;
+  float:right;
+  margin-right:100px;
+  width:40%;
+  margin-top:80px;
+  height:50%;
+}
+#himg
+{
+	margin-top:140px;
+	margin-left:80px;
+}
+.form
+{
+	margin:60px auto;
+	width:300px;
+	padding:30px 25px;
+}
+img
+{
+	margin-top:0px;
+	margin-right:20px;
+}
+h2.product-title
+{
+	
+	color:#ff0000;
+	width:30%;
+	background:white;
+	margin:0px auto 25px;
+	margin-top:20px;
+	font-size:30px;
+	font-weight:300;
+	text-align:center;
+}
+#addp
+{
+	border-radius:3px;
+	margin-left:88%;
+	position:fixed;
+	font-size:15px;
+	border:none;
+	margin-top:210px;
+	background-color:white;
+	color:#ff0000;
+}
+#addp:hover {
+	background-color:yellow;
+  }
+#cancel:hover{
+	background-color:yellow;
+}
+#addDressButton:hover{
+	background-color:yellow;
+}
+
+#dressQuantity,#dressName,#dressPrice,#dressDescription,#dressImageURL
+{
+	font-size:15px;
+	border:3px solid;
+	border-color:#ffff00;
+	padding:10px;
+	margin-bottom:25px;
+	height:20px;
+	width:65%;
+}
+#dressImageURL:focus{
+	
+	border-color:#ff0000;
+	outline:none;
+}
+#dressQuantity:focus{
+	
+	border-color:#ff0000;
+	outline:none;
+}
+#dressName:focus{
+	
+	border-color:#ff0000;
+	outline:none;
+}
+#dressPrice:focus{
+	
+	border-color:#ff0000;
+	outline:none;
+}
+#dressDescription:focus{
+	
+	border-color:#ff0000;
+	outline:none;
+}
+#addDressButton
+{
+	color:#ff0000;
+	background:white;
+	border:0;
+	outline:0;
+	width:20%;
+    margin-bottom:40px;
+	margin-right:25px;
+	height:40px;
+	font-size:20px;
+	text-align:center;
+	cursor:pointer;
+	font-family:Arial, Helvetica, sans-serif;
+	border:none;
+	border-radius:3px;
+}
+#cancel
+{
+	color:#ff0000;
+	border:none;
+	border-radius:3px;
+	background:white;
+	border:0;
+	outline:0;
+	width:20%;
+    margin-bottom:40px;
+	height:40px;
+	font-size:20px;
+	text-align:center;
+	cursor:pointer;
+	font-family:Arial, Helvetica, sans-serif;
+}
