@@ -31,6 +31,10 @@ class Products extends Component {
     this.getProducts = this.getProducts.bind(this);
   }
 
+  componentDidMount() {
+    this.getProducts();
+  }
+
   sortData = () => {
     if(this.state.sort === 'asc'){
       this.state.data.sort(function (a, b) {
@@ -50,7 +54,6 @@ class Products extends Component {
       })
       this.setState({ data: d });
       this.sortData();
-      console.log(this.state.data);
     })
   }
 
@@ -69,9 +72,7 @@ class Products extends Component {
       "quantity": document.querySelector(`.p${e.target.parentElement.parentElement.id}`).innerHTML,
       "email": localStorage.getItem("mail")
     }
-    console.log(addCart);
     axios.post(url, addCart).then((res) => { 
-      console.log(res);
       if(res.data){
         document.querySelector(".info").style.display = "block";
         document.querySelector(".info").style.top = "50px";
@@ -84,25 +85,29 @@ class Products extends Component {
   }
 
   placeOrder = (e) => {
-    console.log(this.state.data, e.target.parentElement.parentElement.id);
     for(var i = 0; i < this.state.data.length; i++){
-      console.log(this.state.data[i].productId === parseInt(e.target.parentElement.parentElement.id));
       if(this.state.data[i].productId === parseInt(e.target.parentElement.parentElement.id)){
         var temp = this.state.data[i];
         break;
       }
     }
-    console.log(temp);
     const order = {
       "userId": localStorage.getItem("mail"),
       "productName": temp.productName,
       "quantity": document.querySelector(`.p${e.target.parentElement.parentElement.id}`).innerHTML,
       "totalPrice": parseInt(temp.price) * parseInt(document.querySelector(`.p${e.target.parentElement.parentElement.id}`).innerHTML),
-      "Status": "Success",
-      "Price": temp.price
+      "status": "Success",
+      "price": temp.price
     }
     axios.post("https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/placeOrders", order).then((res) => {
-      console.log(res);
+      if(res.data){
+        document.querySelector(".info-cart").style.display = "block";
+        document.querySelector(".info-cart").style.top = "50px";
+        setTimeout(function () {
+          document.querySelector(".info-cart").style.display = "none";
+          document.querySelector(".info-cart").style.top = "-1000px";
+        }, 2500);
+      }
     })
   }
 
@@ -118,12 +123,14 @@ class Products extends Component {
   }
  
   render() {
-    this.getProducts();
     return (
       <ProductsContainer>
         <div className="info has-background-success">
           <h1><i className="far fa-check-circle" style={{"marginRight":"10px", "fontSize": "22px"}}></i>Added To Cart</h1>
         </div>
+        <div className="info info-cart has-background-success" >
+              <h1><i className="far fa-check-circle" style={{"marginRight":"10px", "fontSize": "22px"}}></i>Order Placed</h1>
+            </div>
         <ProductsHeading>{this.heading}</ProductsHeading>
         <div className="content-home">
           <div className="control has-icons-left">

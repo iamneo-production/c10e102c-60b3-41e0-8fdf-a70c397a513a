@@ -20,21 +20,16 @@ class HomeAdmin extends Component{
                 this.getProducts();
         }
 
-        componentDidUpdate() {
-                this.getProducts();
-        }
-
         getProducts = () => {
                 axios.get("https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/admin").then((res) => {
                         this.setState({value: res.data});
-                        console.log(this.state.value);
                 })
         }
 
         deleteProduct = (e) => {
                 axios.get(`https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/admin/delete/${e.target.classList[e.target.classList.length - 1]}`).then((res) => {
-                        console.log(res.data);
-                        this.getProducts();
+                        if(res.data)
+                                this.getProducts();
                 })
         }
 
@@ -64,7 +59,7 @@ class HomeAdmin extends Component{
                                                                         <td>Rs. {item.price}</td>
                                                                         <td>{item.quantity}</td>
                                                                         <td>
-                                                                                <Link>
+                                                                                <Link to={{pathname:"/editProduct", state: item.productId}}>
                                                                                         <button className="button btn is-warning">
                                                                                                 <i className="fas fa-edit"></i>
                                                                                         </button>

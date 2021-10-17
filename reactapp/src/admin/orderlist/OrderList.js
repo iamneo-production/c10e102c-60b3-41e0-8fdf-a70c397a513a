@@ -17,15 +17,17 @@ class OrderList extends Component{
         this.getOrders = this.getOrders.bind(this);
     }
 
+    componentDidMount() {
+        this.getOrders();
+    }
+
     getOrders = () => {
         axios.get("https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/admin/orders").then((res) => {
             this.setState({value: res.data});
-            console.log(this.state.value);
         })
     }
 
     render() {
-        this.getOrders();
         return(
             <div id="adminOrderBody">
                 <div>
@@ -46,7 +48,7 @@ class OrderList extends Component{
                                     <td>No Orders Yet</td>
                                 </tr>:
                                 this.state.value.map((item) => 
-                                    <tr>
+                                    <tr key={item.orderId}>
                                         <td>{item.orderId}</td>
                                         <td>{item.userId}</td>
                                         <td>{item.productName}</td>

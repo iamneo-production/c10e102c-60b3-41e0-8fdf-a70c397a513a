@@ -21,6 +21,10 @@ class CartScreen extends Component {
     this.getCart = this.getCart.bind(this);
   }
 
+  componentDidMount() {
+    this.getCart();
+  }
+
   getCart = () => {
     axios.get(`https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/cart/${localStorage.getItem("mail")}`).then((res) => {
       this.setState({value: res.data});
@@ -38,17 +42,27 @@ class CartScreen extends Component {
 
   placeOrder = () => {
     axios.post("https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/saveOrder", {"id": localStorage.getItem("mail")}).then((res) => {
-      console.log(res.data);
+      if(res.data){
+        document.querySelector(".info").style.display = "block";
+        document.querySelector(".info").style.top = "50px";
+        setTimeout(function () {
+          document.querySelector(".info").style.display = "none";
+          document.querySelector(".info").style.top = "-1000px";
+        }, 2500)
+      }
+      this.getCart();
     })
   }
 
   render() {
-    this.getCart();
     return (
       <ProductsContainer>
       <div className="app">
         <div className="cart">
           <div className="cart-list">
+            <div className="info has-background-success" >
+              <h1><i className="far fa-check-circle" style={{"marginRight":"10px", "fontSize": "22px"}}></i>Order Placed</h1>
+            </div>
             <table className="table is-hoverable cart-table">
               <thead>
                 <tr className="has-background-warning">

@@ -42,7 +42,7 @@ const Routes = () => {
       <ProtectedRoute exact auth={localStorage.getItem("user") != null && localStorage.getItem("user") === "true"} path="/orders" component={Home} inner={OrderScreen}/>
       <ProtectedRoute exact auth={localStorage.getItem("admin") != null && localStorage.getItem("admin") === "true"} path="/admin" component={Admin} inner={HomeAdmin}/>
       <ProtectedRoute exact auth={localStorage.getItem("admin") != null && localStorage.getItem("admin") === "true"} path="/addProduct" component={Admin} inner={AddProduct}/>
-      <ProtectedRoute exact auth={localStorage.getItem("admin") != null && localStorage.getItem("admin") === "true"} path="/addProduct" component={Admin} inner={EditProduct}/>
+      <ProtectedRoute exact auth={localStorage.getItem("admin") != null && localStorage.getItem("admin") === "true"} path="/editProduct" component={Admin} inner={EditProduct}/>
       <ProtectedRoute exact auth={localStorage.getItem("admin") != null && localStorage.getItem("admin") === "true"} path="/admin/orders" component={Admin} inner={OrderList}/>
       <Route path="*" component={PageNotFound} />
     </Switch>

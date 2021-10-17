@@ -55,7 +55,6 @@ class SignUp extends Component{
                 "password": this.state.password,
                 "role": "user"
             }
-            console.log(data);
             axios.post(`https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/signup`, data).then((res) => {
                 if(!res.data){
                     document.querySelector(".margin-down").style.display = "block";

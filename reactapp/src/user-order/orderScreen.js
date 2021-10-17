@@ -17,6 +17,14 @@ class OrderScreen extends Component {
     }
   }
 
+  SAFE_componentWillMount() {
+    this.getOrders = this.getOrders.bind(this);
+  }
+
+  componentDidMount() {
+    this.getOrders();
+  }
+
   getOrders = () => {
     axios.post("https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/orders", {"id" : localStorage.getItem("mail")}).then((res) => {
       this.setState({value: res.data});
@@ -24,7 +32,6 @@ class OrderScreen extends Component {
   }
 
   render(){
-    this.getOrders();
     return (
       <ProductsContainer>
         <div className="app">

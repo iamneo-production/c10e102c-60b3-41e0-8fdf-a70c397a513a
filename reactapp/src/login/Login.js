@@ -35,13 +35,11 @@ class Login extends Component{
             "email": this.state.email, 
             "password": this.state.password
         }
-        // console.log(hashedPass);
         if(this.state.email === "admin" && this.state.password === "admin"){
             localStorage.setItem("admin", "true");
             this.props.history.go('/admin');
         }else{
             axios.post(`https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/login`, data).then((res) => {
-                console.log(res.data);
                 if(res.data){
                     localStorage.setItem("user", "true");
                     localStorage.setItem("mail", data['email']);

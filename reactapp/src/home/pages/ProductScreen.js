@@ -23,7 +23,6 @@ export default class ProductScreen extends React.Component{
           "quantity": document.querySelector(".quantity").innerHTML,
           "email": localStorage.getItem("mail")
         }
-        console.log(addCart);
         axios.post(url, addCart).then((res) => { 
             if(res.data){
                 document.querySelector(".info").style.display = "block";
@@ -46,7 +45,14 @@ export default class ProductScreen extends React.Component{
           "Price": this.state.value.price
         }
         axios.post("https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/placeOrders", order).then((res) => {
-          console.log(res);
+            if(res.data){
+                document.querySelector(".info-product").style.display = "block";
+                document.querySelector(".info-product").style.top = "50px";
+                setTimeout(function () {
+                  document.querySelector(".info-product").style.display = "none";
+                  document.querySelector(".info-product").style.top = "-1000px";
+                }, 2500);
+              }
         })
     }
 
@@ -67,6 +73,9 @@ export default class ProductScreen extends React.Component{
             <div className="app-product">
                 <div className="info has-background-success">
                     <h1><i className="far fa-check-circle" style={{"margin-right":"10px", "font-size": "22px"}}></i>Added To Cart</h1>
+                </div>
+                <div className="info info-product has-background-success">
+                    <h1><i className="far fa-check-circle" style={{"margin-right":"10px", "font-size": "22px"}}></i>Order Placed</h1>
                 </div>
                 {
                 
