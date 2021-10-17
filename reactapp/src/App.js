@@ -6,11 +6,13 @@ import Home from './home/Home';
 import Admin from './admin/Admin';
 import OrderList from './admin/orderlist/OrderList';
 import About from './home/pages/about';
-import Temp from './Temp/Temp';
 import PageNotFound from './PageNotFound/PageNotFound';
 import CartScreen from './cart/cartScreen';
-import OrderScreen from './order/orderScreen';
-import ProductScreen from './home/pages/ProductScreen'
+import OrderScreen from './user-order/orderScreen';
+import ProductScreen from './home/pages/ProductScreen';
+import HomeAdmin from './admin/dashboard/Home';
+import AddProduct from './admin/addproduct/AddProduct';
+import EditProduct from './admin/product-edit/EditProduct';
 
 function App() {
   return (
@@ -38,8 +40,9 @@ const Routes = () => {
       <ProtectedRoute exact auth={localStorage.getItem("user") != null && localStorage.getItem("user") === "true"} path="/product/:id" component={Home} inner={ProductScreen}/>
       <ProtectedRoute exact auth={localStorage.getItem("user") != null && localStorage.getItem("user") === "true"} path="/cart" component={Home} inner={CartScreen}/>
       <ProtectedRoute exact auth={localStorage.getItem("user") != null && localStorage.getItem("user") === "true"} path="/orders" component={Home} inner={OrderScreen}/>
-      <ProtectedRoute exact auth={localStorage.getItem("admin") != null && localStorage.getItem("admin") === "true"} path="/admin" component={Admin} inner={Temp}/>
-      <ProtectedRoute exact auth={localStorage.getItem("admin") != null && localStorage.getItem("admin") === "true"} path="/addProduct" component={Admin} inner={Temp}/>
+      <ProtectedRoute exact auth={localStorage.getItem("admin") != null && localStorage.getItem("admin") === "true"} path="/admin" component={Admin} inner={HomeAdmin}/>
+      <ProtectedRoute exact auth={localStorage.getItem("admin") != null && localStorage.getItem("admin") === "true"} path="/addProduct" component={Admin} inner={AddProduct}/>
+      <ProtectedRoute exact auth={localStorage.getItem("admin") != null && localStorage.getItem("admin") === "true"} path="/addProduct" component={Admin} inner={EditProduct}/>
       <ProtectedRoute exact auth={localStorage.getItem("admin") != null && localStorage.getItem("admin") === "true"} path="/admin/orders" component={Admin} inner={OrderList}/>
       <Route path="*" component={PageNotFound} />
     </Switch>

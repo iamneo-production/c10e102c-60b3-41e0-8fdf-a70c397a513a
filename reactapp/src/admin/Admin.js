@@ -1,7 +1,6 @@
 import { Component } from "react";
-// import {Switch, BrowserRouter as Router, Route} from 'react-router-dom';
 import AdminNav from './admin-nav/AdminNav';
-// import OrderList  from "./orderlist/OrderList";
+import './Admin.css';
 
 class Admin  extends Component{
     
@@ -17,10 +16,11 @@ class Admin  extends Component{
 
     render() {
         const Inner = this.props.inner;
+        const prop = this.props.prop;
         return (
             <div>
                 <AdminNav {...this.props} />
-                <Inner />
+                <Inner {...prop} />
             </div>
         );
     }

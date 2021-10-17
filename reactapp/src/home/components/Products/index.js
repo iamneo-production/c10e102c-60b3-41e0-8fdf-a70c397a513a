@@ -50,6 +50,7 @@ class Products extends Component {
       })
       this.setState({ data: d });
       this.sortData();
+      console.log(this.state.data);
     })
   }
 
@@ -70,6 +71,7 @@ class Products extends Component {
     }
     console.log(addCart);
     axios.post(url, addCart).then((res) => { 
+      console.log(res);
       if(res.data){
         document.querySelector(".info").style.display = "block";
         document.querySelector(".info").style.top = "50px";
@@ -84,11 +86,13 @@ class Products extends Component {
   placeOrder = (e) => {
     console.log(this.state.data, e.target.parentElement.parentElement.id);
     for(var i = 0; i < this.state.data.length; i++){
-      if(this.state.data[i].productId === `${e.target.parentElement.parentElement.id}`){
+      console.log(this.state.data[i].productId === parseInt(e.target.parentElement.parentElement.id));
+      if(this.state.data[i].productId === parseInt(e.target.parentElement.parentElement.id)){
         var temp = this.state.data[i];
         break;
       }
     }
+    console.log(temp);
     const order = {
       "userId": localStorage.getItem("mail"),
       "productName": temp.productName,
@@ -147,9 +151,9 @@ class Products extends Component {
                   <ProductDesc>{product.description}</ProductDesc>
                   <ProductPrice>Rs. {product.price}</ProductPrice>
                   <QuantityContainer>
-                    <button className="control" onClick={this.decreaseQuantity}><i className="fas fa-minus"></i></button> 
+                    <button className="control-btn" onClick={this.decreaseQuantity}><i className="fas fa-minus"></i></button> 
                     <div className={`text-box p${product.productId}`}>1</div>
-                    <button className="control" onClick={this.increaseQuantity}><i className="fas fa-plus"></i></button>
+                    <button className="control-btn" onClick={this.increaseQuantity}><i className="fas fa-plus"></i></button>
                   </QuantityContainer>
                   <ProductButton onClick={this.addToCart}>Add to Cart</ProductButton>
                   <ProductButton onClick={this.placeOrder} >Buy Now</ProductButton>

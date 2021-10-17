@@ -8,9 +8,10 @@ import javax.persistence.*;
 public class ProductModel {
     
     // Class Members
-    private String productId;
-    private String imageUrl;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long productId;
+    private String imageUrl;
     private String productName;
     private String price;
     private String description;
@@ -21,7 +22,7 @@ public class ProductModel {
     }
 
     // All Args Constructor
-    public ProductModel(String productId, String imageUrl, String productName, String price, String description, String quantity) {
+    public ProductModel(Long productId, String imageUrl, String productName, String price, String description, String quantity) {
         super();
         this.productId = productId;
         this.imageUrl = imageUrl;
@@ -32,10 +33,10 @@ public class ProductModel {
     }
 
     // Setters and Getters
-    public void setProductId(String productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
-    public String getProductId() {
+    public Long getProductId() {
         return productId;
     }
     public void setImageUrl(String imageUrl) {

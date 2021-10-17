@@ -163,12 +163,12 @@
 .product-text-box {
   border: 1px solid #111;
 }
-.control {
+.control-btn {
   background-color: transparent;
   color: #fff;
   border: none;
 }
-.control:hover{
+.control-btn:hover{
   color: #ffc500;
 }
 

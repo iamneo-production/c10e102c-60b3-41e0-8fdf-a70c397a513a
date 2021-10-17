@@ -57,9 +57,9 @@ class SignUp extends Component{
             }
             console.log(data);
             axios.post(`https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/signup`, data).then((res) => {
-                if(res.data === "Already exists"){
+                if(!res.data){
                     document.querySelector(".margin-down").style.display = "block";
-                }else if(res.data === "Saved Successfully"){
+                }else if(res.data){
                     document.querySelector(".margin-down").style.display = "none";
                     document.querySelector(".success").style.display = "block";
                     setTimeout(() => {

@@ -19,7 +19,8 @@ public class CartService {
     public Boolean addToCart(String quantity, String userId, String id) {
 
         try {
-            ProductModel product = productRepository.findByProductId(id).get(0);
+            Long l = Long.parseLong(id);
+            ProductModel product = productRepository.findByProductId(l).get(0);
             if(Integer.parseInt(quantity)>Integer.parseInt(product.getQuantity()) || userRepository.findByEmail(userId).size()==0) {
                 return false;
             }
@@ -28,6 +29,7 @@ public class CartService {
             cartRepository.save(cart);
         }
         catch(Exception e) {
+            System.out.println(e);
             return false;
         }
 
