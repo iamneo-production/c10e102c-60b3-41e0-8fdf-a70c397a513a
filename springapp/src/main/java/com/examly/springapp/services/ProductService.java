@@ -29,7 +29,7 @@ public class ProductService {
     public ProductModel productEditData(String id)
     {
         try{
-            return productRepository.findByProductId(Long.parseLong(id)).get(0);
+            return productRepository.findByProductId(id).get(0);
         }
         catch(Exception e)
         {
@@ -70,8 +70,8 @@ public class ProductService {
     {
         try
         {
-            ProductModel product = productRepository.findByProductId(Long.parseLong(id)).get(0);
-            productRepository.deleteById(product.getProductId());
+            ProductModel product = productRepository.findByProductId(id).get(0);
+            productRepository.deleteById(product.getProductName());
             List<CartModel> cartItems = new ArrayList<>();
             cartRepository.findAll().forEach(cartItems::add);
             for(CartModel cartItem:cartItems) 

@@ -10,7 +10,7 @@ public class LoginController
     @Autowired
     private UserDao dao;
     @PostMapping("/login")
-    public boolean checkUser(@RequestBody LoginModel login)
+    public Boolean checkUser(@RequestBody LoginModel login)
     {
         try
         {

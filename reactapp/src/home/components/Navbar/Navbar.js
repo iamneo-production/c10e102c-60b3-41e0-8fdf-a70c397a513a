@@ -22,7 +22,7 @@ class Navbar extends Component{
 
     render(){
         return(
-        <nav className="navbar is-warning" role="navigation" aria-label="main navigation" id="userNavbar">
+        <nav className="navbar is-warning" role="navigation" aria-label="main navigation" id="userNavbar" data-testid="userNavbar">
             <div className="navbar-brand">
                 <p className="navbar-item company" id="dressHomeButton">
                 Fantasy-Dress
@@ -37,15 +37,15 @@ class Navbar extends Component{
 
             <div id="navbarBasicExample" className="navbar-menu">
                 <div className="navbar-start">
-                <Link to="/home" className="navbar-item" id="dressHome">
+                <Link to="/home" className="navbar-item" id="dressHome" data-testid="mobileAdminHomeButton">
                 <i className="fas fa-home"></i>Home
                 </Link>
 
-                <Link to="/cart" className="navbar-item" id="dressCartButton">
+                <Link to="/cart" className="navbar-item" id="dressCartButton" data-testid="mobileAdminCartButton">
                 <i className="fas fa-cart-plus"></i>Cart
                 </Link>
 
-                <Link to="/orders" className="navbar-item" id="dressOrderButton">
+                <Link to="/orders" className="navbar-item" id="dressOrderButton" data-testid="mobileAdminOrderButton">
                 <i className="fas fa-truck-loading"></i>My Order
                 </Link>
                 </div>
@@ -53,7 +53,7 @@ class Navbar extends Component{
                 <div className="navbar-end">
                 <div className="navbar-item">
                     <div className="buttons">
-                    <button className="button is-danger" id="logoutButton" onClick={this.buttonClick}>
+                    <button className="button is-danger" id="logoutButton" data-testid="logoutButton" onClick={this.buttonClick}>
                     <i className="fas fa-sign-out-alt"></i>Log out
                     </button>
                     </div>

@@ -58,8 +58,8 @@ class CartScreen extends Component {
     return (
       <ProductsContainer>
       <div className="app">
-        <div className="cart">
-          <div className="cart-list">
+        <div className="cart" id="dressCartBody" data-testid="mobileAdminCartBody">
+          <div className="cart-list" data-testid="dressCartBody">
             <div className="info has-background-success" >
               <h1><i className="far fa-check-circle" style={{"marginRight":"10px", "fontSize": "22px"}}></i>Order Placed</h1>
             </div>

@@ -1,6 +1,7 @@
 import { Component } from "react";
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/index';
+import {withRouter} from 'react-router-dom';
 
 class Home  extends Component{
     constructor(props){
@@ -21,4 +22,4 @@ class Home  extends Component{
     }
 }
 
-export default Home;
+export default withRouter(Home);

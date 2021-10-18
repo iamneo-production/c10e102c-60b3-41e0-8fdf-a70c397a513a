@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 import React, {Component} from 'react';
 import './Login.css';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import axios from 'axios';
 
 var pass = true;
@@ -77,12 +77,12 @@ class Login extends Component{
                 </div>
             </nav>
             <form className="content-container" onSubmit={this.formSubmit}>
-                <div className="form" id="loginBox">
+                <div className="form" id="loginBox" data-testid="loginBox">
                     <h1 className="title text is-warning">Login</h1>
                     <p className="warning margin-down">Username or Password is incorrect* </p>
                     <div className="field">
                         <p className="control has-icons-left ">
-                            <input required className="input" type="text" placeholder="Email" id="email" onChange={this.emailChange}/>
+                            <input required className="input" type="text" placeholder="Email" data-testid="email" id="email" onChange={this.emailChange}/>
                             <span className="icon is-small is-left" >
                                 <i className="fas fa-envelope"></i>
                             </span>
@@ -90,7 +90,7 @@ class Login extends Component{
                     </div>
                     <div className="field">
                         <p className="control has-icons-left has-icons-right">
-                            <input required className="input" type="password" placeholder="Password" id="password" onChange={this.passwordChange}/>
+                            <input required className="input" type="password" data-testid="password" placeholder="Password" id="password" onChange={this.passwordChange}/>
                             <span className="icon is-small is-left">
                             <i className="fas fa-lock"></i>
                             </span>
@@ -101,7 +101,7 @@ class Login extends Component{
                         </div>
                         <div className="field">
                         <p className="control down">
-                            <button className="button is-warning" id="submitButton">
+                            <button className="button is-warning" id="submitButton" data-testid="submitButton">
                             Login
                             </button>
                         </p>
@@ -114,4 +114,4 @@ class Login extends Component{
     }
 }
 
-export default Login;
+export default withRouter(Login);

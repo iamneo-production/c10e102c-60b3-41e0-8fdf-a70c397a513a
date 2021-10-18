@@ -19,7 +19,7 @@ const About = (props) => {
 			<GlobalStyle />
 			<Hero  data={goToSection}/>
 			<ScrollToTop/>
-			<div ref={explr} id="dressHomeBody">
+			<div ref={explr} id="dressHomeBody" data-testid="dressHomeBody">
 				<Products heading='Lets Build your Wardrobe ' />
 			</div>		 
 		</div>

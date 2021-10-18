@@ -11,7 +11,7 @@ public class SignupController {
     private UserDao dao;
 
     @PostMapping("/signup")
-    public boolean saveUser(@RequestBody UserModel user)
+    public Boolean saveUser(@RequestBody UserModel user)
     {
         try{
             UserModel new_user = dao.findById(user.getEmail()).get();

@@ -35,7 +35,7 @@ class OrderScreen extends Component {
     return (
       <ProductsContainer>
         <div className="app">
-          <div className="cart">
+          <div className="cart" id="dressOrderBody" data-testid="mobileAdminOrderBody">
             <div className="cart-list">
             <table className="table is-hoverable cart-table">
               <thead>

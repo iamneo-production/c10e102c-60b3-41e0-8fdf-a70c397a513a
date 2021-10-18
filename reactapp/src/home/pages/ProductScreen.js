@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../../../reactapp/src/';
+// wimport '../../../../reactapp/src/';
 import {
     ProductsContainer,
     ProductButton,

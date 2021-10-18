@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom';
+import {Link, withRouter } from 'react-router-dom';
 import './Signup.css';
 import {Component} from 'react';
 import axios from 'axios';
@@ -174,4 +174,4 @@ class SignUp extends Component{
     }
 }
 
-export default SignUp;
+export default withRouter(SignUp);

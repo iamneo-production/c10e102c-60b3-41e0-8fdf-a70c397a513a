@@ -21,7 +21,7 @@ class AdminNav extends Component{
 
     render(){
         return(
-        <nav className="navbar is-warning" role="navigation" aria-label="main navigation">
+        <nav className="navbar is-warning" role="navigation" aria-label="main navigation" id="adminNavbar" data-testid="adminNavbar">
             <div className="navbar-brand">
                 <p className="navbar-item company" id="dressHomeButton">
                 Fantasy Dress

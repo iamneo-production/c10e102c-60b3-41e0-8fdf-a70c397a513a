@@ -9,12 +9,17 @@ class AddProduct extends Component{
     super(props);
     this.props = props;
     this.state = {
+      id: '',
       name: '',
       url: '',
       description: '',
       price: '0',
       quantity: '0'
     }
+  }
+
+  changeId = (e) => {
+    this.setState({id: e.target.value});
   }
 
   changeName = (e) => {
@@ -40,6 +45,7 @@ class AddProduct extends Component{
   addProductAdmin = (e) => {
     e.preventDefault();
     const data = {
+      "productId": this.state.id,
       "imageUrl": this.state.url,
       "productName": this.state.name,
       "price": this.state.price,
@@ -64,8 +70,14 @@ class AddProduct extends Component{
         <form>
           <div className="addproduct-form" id="signupBox">
               <h1 className="title text is-warning">Add Product</h1>
-              <p className="warning margin-down">User already exists. Login to continue</p>
-              <p className="success">User Created Successfully.</p>
+              <div className="field">
+                  <p className="control has-icons-left ">
+                      <input required className="input" type="text" placeholder="Product Id" id="dressId" onChange={this.changeId}/>
+                      <span className="icon is-small is-left" >
+                          <i className="fas fa-id-card"></i>
+                      </span>
+                  </p>
+              </div>
               <div className="field">
                   <p className="control has-icons-left ">
                       <input required className="input" type="text" placeholder="Product Name" id="dressName" onChange={this.changeName}/>

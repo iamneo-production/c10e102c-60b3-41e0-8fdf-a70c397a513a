@@ -27,8 +27,8 @@ class EditProduct extends Component{
     this.getProductDetails();
   }
 
-  componentDidUpdate() {
-    
+  changeId = (e) => {
+    this.setState({id: e.target.value});
   }
 
   changeName = (e) => {
@@ -54,6 +54,7 @@ class EditProduct extends Component{
   getProductDetails = () => {
     axios.get(`https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/admin/productEdit/${this.state.id}`).then((res) => {
       this.setState({rendered: res.data, name:res.data.productName, url:res.data.imageUrl, description: res.data.description, price: res.data.price, quantity: res.data.quantity});
+      document.querySelector("#dressId").value = this.state.rendered.productId;
       document.querySelector("#dressDescription").innerHTML = this.state.rendered.description;
       document.querySelector("#dressName").value = this.state.rendered.productName;
       document.querySelector("#dressImageUrl").value = this.state.rendered.imageUrl;
@@ -73,6 +74,7 @@ class EditProduct extends Component{
       "quantity": this.state.quantity
     }
     axios.post(`https://8080-abdedcaacccedacedeebaccebadfdbfcfccadbaecfcbc.examlyiopb.examly.io/admin/productEdit/${this.state.id}`, data).then((res) => {
+      console.log(res);
       if(res.data){
         this.props.history.push("/admin");
       }
@@ -90,9 +92,15 @@ class EditProduct extends Component{
         <form>
           <div className="addproduct-form" id="signupBox">
               <h1 className="title text is-warning">Add Product</h1>
-              <p className="warning margin-down">User already exists. Login to continue</p>
-              <p className="success">User Created Successfully.</p>
-              <div className="field">
+                <div className="field">
+                  <p className="control has-icons-left ">
+                      <input required className="input" type="text" placeholder="Product Id" id="dressId" onChange={this.changeId}/>
+                      <span className="icon is-small is-left" >
+                          <i className="fas fa-id-card"></i>
+                      </span>
+                  </p>
+                </div>
+                <div className="field">
                   <p className="control has-icons-left ">
                       <input required className="input" type="text" placeholder="Product Name" id="dressName" onChange={this.changeName} />
                       <span className="icon is-small is-left" >
