@@ -39,6 +39,8 @@
   width: 100%;
   line-height: 2;
   display: flex;
+  overflow-x: hidden;
+  flex-wrap: wrap;
   justify-content: center;
 }
 .details{
@@ -192,4 +194,10 @@
   box-shadow: 2px 2px 3px #fff;
   z-index: 10000;
   transition: top 5000ms ease-in-out;
+}
+
+@media(max-width: 600px){
+  .table{
+    transform: scale(0.5);
+  }
 }

@@ -7,10 +7,10 @@ import javax.persistence.*;
 @Table(name="product")
 public class ProductModel {
     
-    // Class Members
-    @Id
-    private Long productId;
+    // Class Member
+    private String productId;
     private String imageUrl;
+    @Id
     private String productName;
     private String price;
     private String description;
@@ -21,7 +21,7 @@ public class ProductModel {
     }
 
     // All Args Constructor
-    public ProductModel(Long productId, String imageUrl, String productName, String price, String description, String quantity) {
+    public ProductModel(String productId, String imageUrl, String productName, String price, String description, String quantity) {
         super();
         this.productId = productId;
         this.imageUrl = imageUrl;
@@ -32,10 +32,10 @@ public class ProductModel {
     }
 
     // Setters and Getters
-    public void setProductId(Long productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
-    public Long getProductId() {
+    public String getProductId() {
         return productId;
     }
     public void setImageUrl(String imageUrl) {
