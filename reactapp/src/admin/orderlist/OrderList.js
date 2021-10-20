@@ -29,7 +29,7 @@ class OrderList extends Component{
 
     render() {
         return(
-            <div id="adminOrderBody">
+            <div id="adminOrderBody" data-testid="adminOrderBody">
                 <div>
                     <table className="table is-narrow is-hoverable ">
                         <thead>

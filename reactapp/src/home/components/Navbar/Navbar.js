@@ -38,15 +38,15 @@ class Navbar extends Component{
             <div id="navbarBasicExample" className="navbar-menu">
                 <div className="navbar-start">
                 <Link to="/home" className="navbar-item" id="dressHome" data-testid="mobileAdminHomeButton">
-                <i className="fas fa-home"></i>Home
+                <i className="fas fa-home" data-testid="dressHome"></i>Home
                 </Link>
 
                 <Link to="/cart" className="navbar-item" id="dressCartButton" data-testid="mobileAdminCartButton">
-                <i className="fas fa-cart-plus"></i>Cart
+                <i className="fas fa-cart-plus" data-testid="dressCartButton"></i>Cart
                 </Link>
 
                 <Link to="/orders" className="navbar-item" id="dressOrderButton" data-testid="mobileAdminOrderButton">
-                <i className="fas fa-truck-loading"></i>My Order
+                <i className="fas fa-truck-loading" data-testid="dressOrderButton"></i>My Order
                 </Link>
                 </div>
 

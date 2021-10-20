@@ -35,7 +35,7 @@ class HomeAdmin extends Component{
 
         render(){
                 return(
-                        <div className="admin-container">
+                        <div className="admin-container" data-testid="adminDashboard">
                                 <table className="table is-narrow is-hoverable admin-product-table">
                                         <thead>
                                                 <tr className="has-background-warning">

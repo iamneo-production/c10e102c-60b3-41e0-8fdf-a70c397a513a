@@ -37,11 +37,11 @@ class AdminNav extends Component{
             <div id="navbarBasicExample" className="navbar-menu">
                 <div className="navbar-start">
 
-                <Link to="/admin" className="navbar-item" id="adminProductButton">
+                <Link to="/admin" className="navbar-item" id="adminProductButton" data-testid="adminProductButton">
                 <i className="fas fa-shopping-cart"></i>Product
                 </Link>
 
-                <Link to="/admin/orders" className="navbar-item" id="adminOrderButton">
+                <Link to="/admin/orders" className="navbar-item" id="adminOrderButton" data-testid="adminOrderButton">
                 <i className="fas fa-truck"></i>  Orders
                 </Link>
                 </div>
@@ -49,7 +49,7 @@ class AdminNav extends Component{
                 <div className="navbar-end">
                 <div className="navbar-item">
                     <div className="buttons">
-                    <button className="button is-danger" id="logoutButton" onClick={this.buttonClick}>
+                    <button className="button is-danger" id="logoutButton" data-testid="logoutButton" onClick={this.buttonClick}>
                     <i className="fas fa-sign-out-alt"></i> Log out
                     </button>
                     </div>

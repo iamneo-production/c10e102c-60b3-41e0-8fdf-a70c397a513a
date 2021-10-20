@@ -108,13 +108,13 @@ class SignUp extends Component{
                 </div>
             </nav>
             <form className="content-container" onSubmit={this.formClick}>
-                <div className="signup-form" id="signupBox">
+                <div className="signup-form" id="signupBox" data-testid="signupBox">
                     <h1 className="title text is-warning">Sign Up</h1>
                     <p className="warning margin-down">User already exists. Login to continue</p>
                     <p className="success">User Created Successfully.</p>
                     <div className="field">
                         <p className="control has-icons-left ">
-                            <input required className="input" type="email" placeholder="Enter Email" id="email"  onChange={this.emailOnChange} />
+                            <input required className="input" type="email" placeholder="Enter Email" id="email" data-testid="email"  onChange={this.emailOnChange} />
                             <span className="icon is-small is-left" >
                                 <i className="fas fa-envelope"></i>
                             </span>
@@ -122,7 +122,7 @@ class SignUp extends Component{
                     </div>
                     <div className="field">
                         <p className="control has-icons-left ">
-                            <input required className="input" type="text" placeholder="Enter Username" id="username" onChange={this.usernameChange}/>
+                            <input required className="input" type="text" placeholder="Enter Username" id="username" data-testid="username" onChange={this.usernameChange}/>
                             <span className="icon is-small is-left" >
                                 <i className="fas fa-user"></i>
                             </span>
@@ -130,7 +130,7 @@ class SignUp extends Component{
                     </div>
                     <div className="field">
                         <p className="control has-icons-left ">
-                            <input required className="input" type="tel" placeholder="Enter Mobile Number" id="mobilenumber" pattern="[0-9]{10}" onChange={this.mobilenumberChange}/>
+                            <input required className="input" type="tel" placeholder="Enter Mobile Number" id="mobilenumber" data-testid="mobilenumber" pattern="[0-9]{10}" onChange={this.mobilenumberChange}/>
                             <span className="icon is-small is-left" >
                                 <i className="fas fa-phone-alt"></i>
                             </span>
@@ -138,7 +138,7 @@ class SignUp extends Component{
                     </div>
                     <div className="field">
                         <p className="control has-icons-left has-icons-right">
-                            <input required className="input" type="password" placeholder="Enter Password" id="password" onChange={this.passwordChange}/>
+                            <input required className="input" type="password" placeholder="Enter Password" id="password" data-testid="password" onChange={this.passwordChange}/>
                             <span className="icon is-small is-left">
                                 <i className="fas fa-lock"></i>
                             </span>
@@ -149,7 +149,7 @@ class SignUp extends Component{
                     </div>
                     <div className="field">
                         <p className="control has-icons-left  has-icons-right">
-                            <input required className="input" type="password" placeholder="Confirm Password" id="confirmpassword" onChange={this.confirmpasswordChange}/>
+                            <input required className="input" type="password" placeholder="Confirm Password" id="confirmpassword" data-testid="confirmpassword" onChange={this.confirmpasswordChange}/>
                             <span className="icon is-small is-left">
                             <i className="fas fa-lock"></i>
                             </span>
@@ -161,11 +161,11 @@ class SignUp extends Component{
                     </div>
                     <div className="field">
                         <p className="control down">
-                            <button className="button is-warning" id="submitButton">
+                            <button className="button is-warning" id="submitButton" data-testid="submitButton">
                             Sign Up
                             </button>
                         </p>
-                        <p className="control down">Already a member? <Link to="/login" id="signinLink">click here</Link></p>
+                        <p className="control down">Already a member? <Link to="/login" id="signinLink" data-testid="signinLink">click here</Link></p>
                     </div>
                 </div>
             </form>
