@@ -86,7 +86,7 @@ class Products extends Component {
 
   placeOrder = (e) => {
     for(var i = 0; i < this.state.data.length; i++){
-      if(this.state.data[i].productId === parseInt(e.target.parentElement.parentElement.id)){
+      if(this.state.data[i].productId === `${e.target.parentElement.parentElement.id}`){
         var temp = this.state.data[i];
         break;
       }
