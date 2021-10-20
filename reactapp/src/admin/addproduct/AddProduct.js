@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Component } from 'react';
 import axios from 'axios';
+import config from '../../config.json';
 
 
 class AddProduct extends Component{
